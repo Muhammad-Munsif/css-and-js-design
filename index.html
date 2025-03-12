@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/index.js"></script>
+</head>
+<body>
+    <div id="container">
+        <div id="sidenav">
+            <div id="element-card">
+                <h1>Element Creator</h1>
+            <form onsubmit="myFun(event)" name="elementForm">
+                <select name="element">
+                    <option value="h1">Heading</option>
+                    <option value="p">paragraph</option>
+                    <option value="div">Div</option>
+                    <option value="button">button tag</option>
+                </select>
+                <input type="text" placeholder="Enter html tag name" name="text" required="true">
+                <button>Create</button>
+            </form>
+            </div>
+        </div>
+        <div id="section">
+            <div>
+                <h1>Element Preview</h1>
+                <div id="result"></div>
+            </div>
+            
+        </div>
+    </div>
+</body>
+</html>
