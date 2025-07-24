@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link rel="stylesheet" href="css/index.css">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <link rel="stylesheet" href="css/index.css">
+        <script src="js/index.js"></script>
 
 </head>
 <body>
@@ -22,7 +23,7 @@
                     <option value="span">span</option>
                 </select>
                 <input type="text" placeholder="Enter html tag name" name="text" required="true" class="bg-white">
-                <button>Create</button>
+                <button onclick="myFun(event)">Create</button>
             </form>
         </div>
     </div>
@@ -34,6 +35,5 @@
         
     </div>
 </div>
-<script src="js/index.js"></script>
 </body>
 </html>
