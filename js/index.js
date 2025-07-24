@@ -10,7 +10,7 @@ function myFun(event){
     result.append(tag);
 
 }
-/*function myFun(event) {
+function myFun(event) {
     event.preventDefault();
     var form = document.forms.elementForm;
     console.log(form.elements);
@@ -23,4 +23,4 @@ function myFun(event){
     
     var result = document.getElementById("result");
     result.appendChild(tag); // Changed "append" to "appendChild"
- }*/
+ }
