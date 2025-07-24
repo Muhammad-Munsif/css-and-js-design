@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="css/index.css">
-    <script src="js/index.js"></script>
+
 </head>
 <body>
     <div id="container">
@@ -13,25 +14,26 @@
             <div id="element-card">
                 <h1>Element Creator</h1>
             <form onsubmit="myFun(event)" name="elementForm">
-                <select name="element">
+                <select name="element" class="bg-white">
                     <option value="h1">Heading</option>
                     <option value="p">paragraph</option>~
                     <option value="div">Div</option>
                     <option value="button">button tag</option>
                     <option value="span">span</option>
                 </select>
-                <input type="text" placeholder="Enter html tag name" name="text" required="true">
+                <input type="text" placeholder="Enter html tag name" name="text" required="true" class="bg-white">
                 <button>Create</button>
             </form>
-            </div>
-        </div>
-        <div id="section">
-            <div>
-                <h1>Element Preview</h1>
-                <div id="result"></div>
-            </div>
-            
         </div>
     </div>
+    <div id="section">
+        <div>
+            <h1>Element Preview</h1>
+            <div id="result" class="ml-20 text-white font-semibold"></div>
+        </div>
+        
+    </div>
+</div>
+<script src="js/index.js"></script>
 </body>
 </html>
