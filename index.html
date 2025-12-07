@@ -6,42 +6,329 @@
     <title>HTML Element Creator | Playground</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/index.css">
+    <style>
+        :root {
+            --primary-light: #4361ee;
+            --secondary-light: #3a0ca3;
+            --bg-light: #f8fafc;
+            --text-light: #1e293b;
+            --card-light: #ffffff;
+            
+            --primary-dark: #818cf8;
+            --secondary-dark: #4f46e5;
+            --bg-dark: #0f172a;
+            --text-dark: #f1f5f9;
+            --card-dark: #1e293b;
+        }
+
+        .light-mode {
+            --primary: var(--primary-light);
+            --secondary: var(--secondary-light);
+            --bg: var(--bg-light);
+            --text: var(--text-light);
+            --card: var(--card-light);
+            --border: #e2e8f0;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode {
+            --primary: var(--primary-dark);
+            --secondary: var(--secondary-dark);
+            --bg: var(--bg-dark);
+            --text: var(--text-dark);
+            --card: var(--card-dark);
+            --border: #334155;
+            --shadow: rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .theme-transition {
+            transition: all 0.3s ease;
+        }
+
+        .preview-element {
+            animation: fadeIn 0.5s ease;
+            border: 2px dashed var(--primary);
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 0.5rem;
+            background-color: rgba(var(--primary-rgb), 0.05);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode .preview-element {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .dark-mode .glass-effect {
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Mobile menu animation */
+        .mobile-menu {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            #sidenav {
+                width: 100%;
+                position: relative;
+                height: auto;
+            }
+            
+            #section {
+                margin-left: 0;
+                width: 100%;
+            }
+            
+            .grid-cols-3 {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .grid-cols-3 {
+                grid-template-columns: 1fr !important;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr !important;
+            }
+            
+            .flex-wrap-mobile {
+                flex-wrap: wrap;
+            }
+            
+            .space-x-4 > * {
+                margin-right: 0.5rem !important;
+                margin-bottom: 0.5rem !important;
+            }
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--border);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary);
+        }
+
+        /* Theme toggle switch */
+        .theme-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+        }
+
+        .theme-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .theme-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .theme-slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .theme-slider {
+            background-color: var(--primary);
+        }
+
+        input:checked + .theme-slider:before {
+            transform: translateX(30px);
+        }
+
+        .theme-slider i {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 12px;
+        }
+
+        .theme-slider .fa-sun {
+            left: 8px;
+            color: #f39c12;
+        }
+
+        .theme-slider .fa-moon {
+            right: 8px;
+            color: #34495e;
+        }
+    </style>
 </head>
 
-<body>
-    <div class="min-h-screen flex">
-        <!-- Sidebar -->
-        <div class="w-96 glass-effect p-6 shadow-xl flex flex-col">
+<body class="light-mode">
+    <!-- Mobile Menu Button -->
+    <div class="lg:hidden fixed top-4 left-4 z-50">
+        <button id="mobileMenuBtn" class="bg-white dark:bg-gray-800 p-3 rounded-lg shadow-lg">
+            <i class="fas fa-bars text-gray-800 dark:text-white"></i>
+        </button>
+    </div>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobileMenu" class="mobile-menu fixed inset-0 bg-black/50 z-40 lg:hidden" style="display: none;">
+        <div class="absolute left-0 top-0 h-full w-80 bg-white dark:bg-gray-900 shadow-xl p-6 overflow-y-auto">
+            <button id="closeMobileMenu" class="absolute top-4 right-4 text-gray-600 dark:text-gray-300">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+            
+            <!-- Mobile Sidebar Content -->
+            <div class="mt-8">
+                <!-- Theme Toggle -->
+                <div class="flex items-center justify-between mb-8">
+                    <span class="font-semibold">Theme</span>
+                    <label class="theme-switch">
+                        <input type="checkbox" id="themeToggleMobile">
+                        <span class="theme-slider">
+                            <i class="fas fa-sun"></i>
+                            <i class="fas fa-moon"></i>
+                        </span>
+                    </label>
+                </div>
+
+                <!-- Form for Mobile -->
+                <div id="mobileFormContainer"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="min-h-screen flex flex-col lg:flex-row">
+        <!-- Sidebar for Desktop -->
+        <div class="hidden lg:flex lg:w-80 xl:w-96 p-4 lg:p-6 flex-col theme-transition" id="desktopSidebar">
             <!-- Header -->
             <div class="mb-8">
-                <div class="flex items-center mb-2">
-                    <div class="w-10 h-10 rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center mr-3">
-                        <i class="fas fa-code text-white text-xl"></i>
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center mr-3">
+                            <i class="fas fa-code text-white text-xl"></i>
+                        </div>
+                        <h1 class="text-xl lg:text-2xl font-bold text-gray-800 dark:text-white">HTML Creator</h1>
                     </div>
-                    <h1 class="text-2xl font-bold text-white">HTML Creator</h1>
+                    
+                    <!-- Theme Toggle for Desktop -->
+                    <label class="theme-switch">
+                        <input type="checkbox" id="themeToggle">
+                        <span class="theme-slider">
+                            <i class="fas fa-sun"></i>
+                            <i class="fas fa-moon"></i>
+                        </span>
+                    </label>
                 </div>
-                <p class="text-gray-200 text-sm">Create HTML elements dynamically with live preview</p>
+                
+                <p class="text-gray-600 dark:text-gray-300 text-sm">Create HTML elements dynamically with live preview</p>
                 <div class="flex items-center mt-3">
                     <div class="w-3 h-3 rounded-full bg-green-500 animate-pulse mr-2"></div>
-                    <span class="text-green-300 text-sm font-medium">Live Preview Active</span>
+                    <span class="text-green-600 dark:text-green-400 text-sm font-medium">Live Preview Active</span>
                 </div>
             </div>
 
             <!-- Form Card -->
-            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 mb-6">
-                <h2 class="text-xl font-semibold text-white mb-4 flex items-center">
-                    <i class="fas fa-plus-circle mr-2 text-blue-300"></i> Create New Element
+            <div class="bg-white dark:bg-gray-800 rounded-xl p-4 lg:p-6 mb-6 shadow-lg border border-gray-200 dark:border-gray-700 theme-transition">
+                <h2 class="text-lg lg:text-xl font-semibold text-gray-800 dark:text-white mb-4 flex items-center">
+                    <i class="fas fa-plus-circle mr-2 text-blue-500 dark:text-blue-400"></i> Create New Element
                 </h2>
                 
-                <form id="elementForm" class="space-y-5">
+                <form id="elementForm" class="space-y-4 lg:space-y-5">
                     <!-- Element Type Selection -->
                     <div>
-                        <label class="block text-gray-200 mb-2 font-medium">
+                        <label class="block text-gray-700 dark:text-gray-300 mb-2 font-medium">
                             <i class="fas fa-tag mr-2"></i>Element Type
                         </label>
                         
-                        <select id="elementSelect" required class="w-full p-3 rounded-lg bg-white/90 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <div class="grid grid-cols-2 lg:grid-cols-3 gap-2 mb-3">
+                            <button type="button" onclick="selectElement('h1')" class="element-btn p-3 rounded-lg bg-blue-100 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-800 text-gray-800 dark:text-white text-center hover:bg-blue-200 dark:hover:bg-blue-800 transition">
+                                <i class="fas fa-heading mb-1 block text-lg"></i> H1
+                            </button>
+                            <button type="button" onclick="selectElement('p')" class="element-btn p-3 rounded-lg bg-green-100 dark:bg-green-900/30 border border-green-200 dark:border-green-800 text-gray-800 dark:text-white text-center hover:bg-green-200 dark:hover:bg-green-800 transition">
+                                <i class="fas fa-paragraph mb-1 block text-lg"></i> P
+                            </button>
+                            <button type="button" onclick="selectElement('button')" class="element-btn p-3 rounded-lg bg-purple-100 dark:bg-purple-900/30 border border-purple-200 dark:border-purple-800 text-gray-800 dark:text-white text-center hover:bg-purple-200 dark:hover:bg-purple-800 transition">
+                                <i class="fas fa-square mb-1 block text-lg"></i> Button
+                            </button>
+                            <button type="button" onclick="selectElement('div')" class="element-btn p-3 rounded-lg bg-yellow-100 dark:bg-yellow-900/30 border border-yellow-200 dark:border-yellow-800 text-gray-800 dark:text-white text-center hover:bg-yellow-200 dark:hover:bg-yellow-800 transition">
+                                <i class="fas fa-square-full mb-1 block text-lg"></i> Div
+                            </button>
+                            <button type="button" onclick="selectElement('span')" class="element-btn p-3 rounded-lg bg-pink-100 dark:bg-pink-900/30 border border-pink-200 dark:border-pink-800 text-gray-800 dark:text-white text-center hover:bg-pink-200 dark:hover:bg-pink-800 transition">
+                                <i class="fas fa-i-cursor mb-1 block text-lg"></i> Span
+                            </button>
+                            <button type="button" onclick="selectElement('a')" class="element-btn p-3 rounded-lg bg-red-100 dark:bg-red-900/30 border border-red-200 dark:border-red-800 text-gray-800 dark:text-white text-center hover:bg-red-200 dark:hover:bg-red-800 transition">
+                                <i class="fas fa-link mb-1 block text-lg"></i> Link
+                            </button>
+                        </div>
+                        
+                        <select id="elementSelect" required class="w-full p-3 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent theme-transition">
                             <option value="" disabled selected>Select element type</option>
                             <option value="h1">Heading 1 (h1)</option>
                             <option value="h2">Heading 2 (h2)</option>
@@ -59,19 +346,44 @@
 
                     <!-- Content Input -->
                     <div>
-                        <label class="block text-gray-200 mb-2 font-medium">
+                        <label class="block text-gray-700 dark:text-gray-300 mb-2 font-medium">
                             <i class="fas fa-align-left mr-2"></i>Element Content
                         </label>
                         <input type="text" id="contentInput" placeholder="Enter your content here..." 
-                               required class="w-full p-3 rounded-lg bg-white/90 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                               required class="w-full p-3 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent theme-transition">
+                    </div>
+
+                    <!-- Additional Options -->
+                    <div class="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4">
+                        <h3 class="text-gray-700 dark:text-gray-300 mb-3 font-medium flex items-center">
+                            <i class="fas fa-sliders-h mr-2"></i>Additional Options
+                        </h3>
+                        
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-gray-700 dark:text-gray-300 text-sm mb-1">Text Color</label>
+                                <input type="color" id="textColor" value="#1e293b" class="w-full h-10 rounded cursor-pointer dark:bg-gray-600">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 dark:text-gray-300 text-sm mb-1">Background</label>
+                                <input type="color" id="bgColor" value="#4361ee" class="w-full h-10 rounded cursor-pointer dark:bg-gray-600">
+                            </div>
+                        </div>
+                        
+                        <div class="mt-3">
+                            <label class="inline-flex items-center text-gray-700 dark:text-gray-300">
+                                <input type="checkbox" id="addBorder" class="rounded text-blue-500 dark:text-blue-400">
+                                <span class="ml-2 text-sm">Add Border</span>
+                            </label>
+                        </div>
                     </div>
 
                     <!-- Action Buttons -->
-                    <div class="flex space-x-3 pt-2">
-                        <button type="submit" class="flex-1 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold py-3 px-6 rounded-lg flex items-center justify-center hover:opacity-90 transition">
+                    <div class="flex space-x-3 pt-2 flex-wrap-mobile">
+                        <button type="submit" class="flex-1 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold py-3 px-4 lg:px-6 rounded-lg flex items-center justify-center hover:opacity-90 transition">
                             <i class="fas fa-plus mr-2"></i> Create Element
                         </button>
-                        <button type="button" onclick="clearAll()" class="px-6 py-3 bg-red-500/20 text-red-300 border border-red-400/30 rounded-lg hover:bg-red-500/40 transition">
+                        <button type="button" onclick="clearAll()" class="px-4 lg:px-6 py-3 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 border border-red-200 dark:border-red-800 rounded-lg hover:bg-red-200 dark:hover:bg-red-800 transition">
                             <i class="fas fa-trash"></i>
                         </button>
                     </div>
@@ -79,93 +391,589 @@
             </div>
 
             <!-- Stats Card -->
-            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-5">
-                <h3 class="text-gray-200 mb-3 font-medium flex items-center">
+            <div class="bg-white dark:bg-gray-800 rounded-xl p-4 lg:p-5 shadow-lg border border-gray-200 dark:border-gray-700 theme-transition">
+                <h3 class="text-gray-700 dark:text-gray-300 mb-3 font-medium flex items-center">
                     <i class="fas fa-chart-bar mr-2"></i>Creation Stats
                 </h3>
-                <div class="grid grid-cols-2 gap-3">
-                    <div class="bg-blue-500/20 rounded-lg p-3 text-center">
-                        <div class="text-white text-2xl font-bold" id="totalElements">0</div>
-                        <div class="text-blue-200 text-xs">Total Elements</div>
+                <div class="grid grid-cols-2 gap-3 stats-grid">
+                    <div class="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3 text-center border border-blue-100 dark:border-blue-800">
+                        <div class="text-blue-600 dark:text-blue-400 text-2xl font-bold" id="totalElements">0</div>
+                        <div class="text-blue-500 dark:text-blue-300 text-xs">Total Elements</div>
                     </div>
-                    <div class="bg-green-500/20 rounded-lg p-3 text-center">
-                        <div class="text-white text-2xl font-bold" id="lastElement">None</div>
-                        <div class="text-green-200 text-xs">Last Created</div>
+                    <div class="bg-green-50 dark:bg-green-900/20 rounded-lg p-3 text-center border border-green-100 dark:border-green-800">
+                        <div class="text-green-600 dark:text-green-400 text-2xl font-bold" id="lastElement">None</div>
+                        <div class="text-green-500 dark:text-green-300 text-xs">Last Created</div>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Main Content -->
-        <div class="flex-1 p-8 overflow-auto">
+        <div class="flex-1 p-4 lg:p-8 overflow-auto theme-transition">
             <!-- Header -->
-            <div class="mb-8">
-                <h1 class="text-3xl font-bold text-white mb-2 flex items-center">
-                    <i class="fas fa-eye mr-3 text-blue-300"></i> Live Element Preview
-                </h1>
-                <p class="text-gray-300">Watch your HTML elements come to life in real-time</p>
+            <div class="mb-6 lg:mb-8">
+                <div class="flex flex-col lg:flex-row lg:items-center justify-between mb-4">
+                    <div>
+                        <h1 class="text-2xl lg:text-3xl font-bold text-gray-800 dark:text-white mb-2 flex items-center">
+                            <i class="fas fa-eye mr-3 text-blue-500 dark:text-blue-400"></i> Live Element Preview
+                        </h1>
+                        <p class="text-gray-600 dark:text-gray-300">Watch your HTML elements come to life in real-time</p>
+                    </div>
+                    
+                    <div class="mt-4 lg:mt-0 flex items-center space-x-4">
+                        <!-- Mobile Theme Toggle (only on mobile) -->
+                        <div class="lg:hidden">
+                            <label class="theme-switch">
+                                <input type="checkbox" id="themeToggleMobile2">
+                                <span class="theme-slider">
+                                    <i class="fas fa-sun"></i>
+                                    <i class="fas fa-moon"></i>
+                                </span>
+                            </label>
+                        </div>
+                        
+                        <div class="flex space-x-2 flex-wrap">
+                            <button onclick="exportHTML()" class="px-3 lg:px-4 py-2 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 border border-green-200 dark:border-green-800 rounded-lg hover:bg-green-200 dark:hover:bg-green-800 transition flex items-center">
+                                <i class="fas fa-download mr-2"></i> <span class="hidden lg:inline">Export</span>
+                            </button>
+                            <button onclick="toggleEditMode()" id="editModeBtn" class="px-3 lg:px-4 py-2 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 border border-purple-200 dark:border-purple-800 rounded-lg hover:bg-purple-200 dark:hover:bg-purple-800 transition flex items-center">
+                                <i class="fas fa-edit mr-2"></i> <span class="hidden lg:inline">Edit</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
                 
-                <div class="flex items-center mt-4 space-x-4">
-                    <button onclick="exportHTML()" class="px-4 py-2 bg-green-500/20 text-green-300 border border-green-400/30 rounded-lg hover:bg-green-500/40 transition flex items-center">
-                        <i class="fas fa-download mr-2"></i> Export HTML
-                    </button>
-                    <div class="ml-auto">
+                <div class="flex flex-col lg:flex-row lg:items-center space-y-2 lg:space-y-0 lg:space-x-4">
+                    <div class="flex-1">
                         <input type="text" id="searchElements" placeholder="Search elements..." 
-                               class="p-2 rounded-lg bg-white/10 border border-gray-300/30 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                               class="w-full p-3 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-800 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent theme-transition">
+                    </div>
+                    <div class="text-gray-600 dark:text-gray-300 text-sm">
+                        <span id="elementCount">0 elements</span>
                     </div>
                 </div>
             </div>
 
             <!-- Preview Area -->
-            <div class="bg-black/30 rounded-xl p-6 min-h-[400px] border-2 border-dashed border-blue-400/50">
-                <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-xl font-semibold text-white flex items-center">
-                        <i class="fas fa-code mr-2 text-yellow-400"></i> Generated Elements
+            <div class="bg-white dark:bg-gray-800 rounded-xl p-4 lg:p-6 min-h-[400px] border-2 border-dashed border-blue-300 dark:border-blue-700 theme-transition">
+                <div class="flex flex-col lg:flex-row lg:items-center justify-between mb-6">
+                    <h2 class="text-xl font-semibold text-gray-800 dark:text-white mb-2 lg:mb-0 flex items-center">
+                        <i class="fas fa-code mr-2 text-yellow-500 dark:text-yellow-400"></i> Generated Elements
                     </h2>
-                    <div class="text-gray-300">
-                        <span id="elementCount">0 elements</span>
-                    </div>
                 </div>
                 
                 <!-- No Elements Message -->
-                <div id="emptyState" class="text-center py-16">
-                    <div class="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
-                        <i class="fas fa-code text-white text-4xl"></i>
+                <div id="emptyState" class="text-center py-8 lg:py-16">
+                    <div class="w-16 h-16 lg:w-24 lg:h-24 mx-auto mb-4 lg:mb-6 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
+                        <i class="fas fa-code text-white text-2xl lg:text-4xl"></i>
                     </div>
-                    <h3 class="text-xl text-white mb-2">No elements created yet</h3>
-                    <p class="text-gray-400 max-w-md mx-auto">Start creating HTML elements using the form on the left. Your creations will appear here in real-time.</p>
+                    <h3 class="text-lg lg:text-xl text-gray-800 dark:text-white mb-2">No elements created yet</h3>
+                    <p class="text-gray-600 dark:text-gray-400 max-w-md mx-auto px-4">Start creating HTML elements using the form on the left. Your creations will appear here in real-time.</p>
                 </div>
                 
                 <!-- Elements Container -->
-                <div id="result" class="space-y-4">
+                <div id="result" class="space-y-3 lg:space-y-4">
                     <!-- Elements will be dynamically added here -->
                 </div>
             </div>
 
             <!-- Code Preview -->
-            <div class="mt-8 bg-gray-900/80 rounded-xl p-6">
-                <div class="flex justify-between items-center mb-4">
-                    <h3 class="text-xl font-semibold text-white flex items-center">
-                        <i class="fas fa-file-code mr-2 text-green-400"></i> Generated HTML Code
+            <div class="mt-6 lg:mt-8 bg-gray-50 dark:bg-gray-800 rounded-xl p-4 lg:p-6 theme-transition">
+                <div class="flex flex-col lg:flex-row lg:items-center justify-between mb-4">
+                    <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-2 lg:mb-0 flex items-center">
+                        <i class="fas fa-file-code mr-2 text-green-500 dark:text-green-400"></i> Generated HTML Code
                     </h3>
-                    <button onclick="copyCode()" class="px-4 py-2 bg-blue-500/20 text-blue-300 border border-blue-400/30 rounded-lg hover:bg-blue-500/40 transition flex items-center">
+                    <button onclick="copyCode()" class="px-4 py-2 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 border border-blue-200 dark:border-blue-800 rounded-lg hover:bg-blue-200 dark:hover:bg-blue-800 transition flex items-center mt-2 lg:mt-0">
                         <i class="fas fa-copy mr-2"></i> Copy Code
                     </button>
                 </div>
-                <pre id="codePreview" class="bg-gray-800 p-4 rounded-lg text-gray-200 overflow-x-auto text-sm">
+                <pre id="codePreview" class="bg-gray-100 dark:bg-gray-900 p-4 rounded-lg text-gray-800 dark:text-gray-200 overflow-x-auto text-sm lg:text-base mt-4 theme-transition">
 &lt;!-- Generated HTML will appear here --&gt;</pre>
             </div>
         </div>
     </div>
 
     <!-- Toast Notification -->
-    <div id="toast" class="fixed bottom-4 right-4 bg-green-600 text-white p-4 rounded-lg shadow-lg hidden z-50">
+    <div id="toast" class="fixed bottom-4 right-4 bg-green-600 text-white p-4 rounded-lg shadow-lg hidden z-50 max-w-xs lg:max-w-sm theme-transition">
         <div class="flex items-center">
             <i class="fas fa-check-circle mr-2"></i>
             <span id="toastMessage">Element created successfully!</span>
         </div>
     </div>
 
-    <script src="js/index.js"></script>
+    <script>
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize theme
+            initTheme();
+            
+            // Load saved elements
+            loadElements();
+            
+            // Setup form submission
+            document.getElementById('elementForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                createElement();
+            });
+            
+            // Setup mobile form submission (clone from desktop)
+            const mobileFormContainer = document.getElementById('mobileFormContainer');
+            if (mobileFormContainer) {
+                const desktopForm = document.getElementById('elementForm');
+                if (desktopForm) {
+                    mobileFormContainer.innerHTML = desktopForm.innerHTML;
+                    mobileFormContainer.querySelector('form').addEventListener('submit', function(e) {
+                        e.preventDefault();
+                        createElement();
+                        closeMobileMenu();
+                    });
+                }
+            }
+            
+            // Setup search
+            document.getElementById('searchElements').addEventListener('input', function(e) {
+                searchElements(e.target.value);
+            });
+            
+            // Setup theme toggles
+            setupThemeToggles();
+            
+            // Setup mobile menu
+            setupMobileMenu();
+        });
+
+        // Global variables
+        let elements = [];
+        let elementIdCounter = 0;
+        let editMode = false;
+
+        // Theme Management
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            setTheme(savedTheme);
+            
+            // Update all theme toggles
+            document.querySelectorAll('#themeToggle, #themeToggleMobile, #themeToggleMobile2').forEach(toggle => {
+                toggle.checked = savedTheme === 'dark';
+            });
+        }
+
+        function setTheme(theme) {
+            document.body.className = theme + '-mode';
+            localStorage.setItem('theme', theme);
+        }
+
+        function toggleTheme() {
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            setTheme(newTheme);
+            
+            // Update all theme toggles
+            document.querySelectorAll('#themeToggle, #themeToggleMobile, #themeToggleMobile2').forEach(toggle => {
+                toggle.checked = newTheme === 'dark';
+            });
+        }
+
+        function setupThemeToggles() {
+            // Desktop toggle
+            const desktopToggle = document.getElementById('themeToggle');
+            if (desktopToggle) {
+                desktopToggle.addEventListener('change', toggleTheme);
+            }
+            
+            // Mobile toggles
+            const mobileToggle1 = document.getElementById('themeToggleMobile');
+            const mobileToggle2 = document.getElementById('themeToggleMobile2');
+            
+            if (mobileToggle1) {
+                mobileToggle1.addEventListener('change', toggleTheme);
+            }
+            
+            if (mobileToggle2) {
+                mobileToggle2.addEventListener('change', toggleTheme);
+            }
+        }
+
+        // Mobile Menu Management
+        function setupMobileMenu() {
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const closeMobileMenuBtn = document.getElementById('closeMobileMenu');
+            const mobileMenu = document.getElementById('mobileMenu');
+
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    mobileMenu.style.display = 'block';
+                    setTimeout(() => mobileMenu.classList.add('active'), 10);
+                });
+            }
+
+            if (closeMobileMenuBtn && mobileMenu) {
+                closeMobileMenuBtn.addEventListener('click', closeMobileMenu);
+            }
+
+            if (mobileMenu) {
+                mobileMenu.addEventListener('click', function(e) {
+                    if (e.target === mobileMenu) {
+                        closeMobileMenu();
+                    }
+                });
+            }
+        }
+
+        function closeMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            if (mobileMenu) {
+                mobileMenu.classList.remove('active');
+                setTimeout(() => mobileMenu.style.display = 'none', 300);
+            }
+        }
+
+        // Load elements from localStorage
+        function loadElements() {
+            const saved = localStorage.getItem('htmlElements');
+            if (saved) {
+                elements = JSON.parse(saved);
+                elementIdCounter = elements.length > 0 ? Math.max(...elements.map(e => e.id)) + 1 : 0;
+                
+                // Render all elements
+                elements.forEach(element => {
+                    renderElement(element);
+                });
+                
+                updateUI();
+            }
+        }
+
+        // Save elements to localStorage
+        function saveElements() {
+            localStorage.setItem('htmlElements', JSON.stringify(elements));
+        }
+
+        // Select element from quick buttons
+        function selectElement(type) {
+            const selectElement = document.getElementById('elementSelect');
+            if (selectElement) {
+                selectElement.value = type;
+                
+                // Highlight selected button
+                document.querySelectorAll('.element-btn').forEach(btn => {
+                    btn.classList.remove('ring-2', 'ring-blue-500');
+                });
+                event.target.classList.add('ring-2', 'ring-blue-500');
+            }
+        }
+
+        // Create new element
+        function createElement() {
+            const elementType = document.getElementById('elementSelect').value;
+            const content = document.getElementById('contentInput').value;
+            const textColor = document.getElementById('textColor').value;
+            const bgColor = document.getElementById('bgColor').value;
+            const addBorder = document.getElementById('addBorder').checked;
+            
+            if (!elementType || !content) {
+                showToast('Please select element type and enter content', 'error');
+                return;
+            }
+            
+            // Create element object
+            const elementData = {
+                id: elementIdCounter++,
+                type: elementType,
+                content: content,
+                textColor: textColor,
+                bgColor: bgColor,
+                addBorder: addBorder,
+                timestamp: new Date().toISOString()
+            };
+            
+            // Add to array
+            elements.push(elementData);
+            
+            // Save to localStorage
+            saveElements();
+            
+            // Render the element
+            renderElement(elementData);
+            
+            // Update UI
+            updateUI();
+            
+            // Show success message
+            showToast(`${elementType.toUpperCase()} element created successfully!`);
+            
+            // Clear form
+            document.getElementById('elementForm').reset();
+        }
+
+        // Render a single element
+        function renderElement(elementData) {
+            const resultDiv = document.getElementById('result');
+            
+            // Hide empty state if it's the first element
+            if (elements.length === 1) {
+                document.getElementById('emptyState').style.display = 'none';
+            }
+            
+            // Create element wrapper
+            const wrapper = document.createElement('div');
+            wrapper.className = 'relative group';
+            wrapper.dataset.id = elementData.id;
+            
+            // Create the HTML element
+            const element = document.createElement(elementData.type);
+            element.className = 'preview-element';
+            element.textContent = elementData.content;
+            
+            // Apply styles
+            element.style.color = elementData.textColor;
+            element.style.backgroundColor = elementData.bgColor + '40';
+            element.style.border = elementData.addBorder ? `2px solid ${elementData.bgColor}` : '2px dashed var(--primary)';
+            element.style.padding = '1rem';
+            element.style.borderRadius = '0.5rem';
+            element.style.margin = '0.5rem 0';
+            element.style.wordBreak = 'break-word';
+            
+            // Add delete button
+            const deleteBtn = document.createElement('button');
+            deleteBtn.innerHTML = '<i class="fas fa-times"></i>';
+            deleteBtn.className = 'absolute top-2 right-2 text-red-500 hover:text-red-600 dark:text-red-400 dark:hover:text-red-300 transition opacity-0 group-hover:opacity-100 bg-white dark:bg-gray-800 rounded-full w-6 h-6 flex items-center justify-center z-10 shadow';
+            deleteBtn.onclick = function() {
+                deleteElement(elementData.id);
+            };
+            
+            // Add element info badge
+            const infoBadge = document.createElement('div');
+            infoBadge.className = 'absolute top-2 left-2 bg-white/80 dark:bg-gray-800/80 text-xs text-gray-600 dark:text-gray-300 px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition';
+            infoBadge.textContent = `<${elementData.type}>`;
+            
+            wrapper.appendChild(element);
+            wrapper.appendChild(deleteBtn);
+            wrapper.appendChild(infoBadge);
+            resultDiv.appendChild(wrapper);
+        }
+
+        // Delete element
+        function deleteElement(id) {
+            if (confirm('Are you sure you want to delete this element?')) {
+                // Remove from array
+                elements = elements.filter(el => el.id !== id);
+                
+                // Remove from DOM
+                const elementToRemove = document.querySelector(`[data-id="${id}"]`);
+                if (elementToRemove) {
+                    elementToRemove.remove();
+                }
+                
+                // Save to localStorage
+                saveElements();
+                
+                // Update UI
+                updateUI();
+                
+                // Show empty state if no elements
+                if (elements.length === 0) {
+                    document.getElementById('emptyState').style.display = 'block';
+                }
+                
+                showToast('Element deleted', 'warning');
+            }
+        }
+
+        // Clear all elements
+        function clearAll() {
+            if (elements.length === 0) {
+                showToast('No elements to clear', 'info');
+                return;
+            }
+            
+            if (confirm('Are you sure you want to delete ALL elements?')) {
+                elements = [];
+                
+                // Clear DOM
+                document.getElementById('result').innerHTML = '';
+                
+                // Clear localStorage
+                localStorage.removeItem('htmlElements');
+                
+                // Update UI
+                updateUI();
+                
+                // Show empty state
+                document.getElementById('emptyState').style.display = 'block';
+                
+                showToast('All elements cleared', 'warning');
+            }
+        }
+
+        // Toggle edit mode
+        function toggleEditMode() {
+            editMode = !editMode;
+            const btn = document.getElementById('editModeBtn');
+            if (editMode) {
+                btn.innerHTML = '<i class="fas fa-times mr-2"></i> <span class="hidden lg:inline">Exit Edit</span>';
+                btn.classList.add('bg-red-100', 'dark:bg-red-900/30', 'text-red-700', 'dark:text-red-400', 'border-red-200', 'dark:border-red-800');
+                btn.classList.remove('bg-purple-100', 'dark:bg-purple-900/30', 'text-purple-700', 'dark:text-purple-400', 'border-purple-200', 'dark:border-purple-800');
+                showToast('Edit mode enabled');
+            } else {
+                btn.innerHTML = '<i class="fas fa-edit mr-2"></i> <span class="hidden lg:inline">Edit</span>';
+                btn.classList.remove('bg-red-100', 'dark:bg-red-900/30', 'text-red-700', 'dark:text-red-400', 'border-red-200', 'dark:border-red-800');
+                btn.classList.add('bg-purple-100', 'dark:bg-purple-900/30', 'text-purple-700', 'dark:text-purple-400', 'border-purple-200', 'dark:border-purple-800');
+            }
+        }
+
+        // Update UI elements
+        function updateUI() {
+            // Update stats
+            document.getElementById('totalElements').textContent = elements.length;
+            document.getElementById('elementCount').textContent = `${elements.length} element${elements.length !== 1 ? 's' : ''}`;
+            
+            if (elements.length > 0) {
+                const last = elements[elements.length - 1];
+                document.getElementById('lastElement').textContent = `<${last.type}>`;
+            } else {
+                document.getElementById('lastElement').textContent = 'None';
+            }
+            
+            // Update code preview
+            updateCodePreview();
+        }
+
+        // Update code preview
+        function updateCodePreview() {
+            let html = '';
+            elements.forEach(el => {
+                const borderStyle = el.addBorder ? `border: 2px solid ${el.bgColor};` : '';
+                html += `&lt;${el.type} style="color: ${el.textColor}; background-color: ${el.bgColor}40; ${borderStyle}"&gt;${el.content}&lt;/${el.type}&gt;\n`;
+            });
+            document.getElementById('codePreview').textContent = html || '<!-- No elements generated yet -->';
+        }
+
+        // Export HTML
+        function exportHTML() {
+            if (elements.length === 0) {
+                showToast('No elements to export', 'info');
+                return;
+            }
+            
+            let htmlContent = '<!DOCTYPE html>\n<html>\n<head>\n<title>Generated Elements</title>\n<style>\nbody { font-family: Arial, sans-serif; padding: 20px; background: #f8fafc; color: #1e293b; }\n.generated-element { margin: 10px 0; padding: 10px; border-radius: 8px; }\n</style>\n</head>\n<body>\n';
+            
+            elements.forEach(el => {
+                const borderStyle = el.addBorder ? `border: 2px solid ${el.bgColor};` : '';
+                htmlContent += `<${el.type} class="generated-element" style="color: ${el.textColor}; background-color: ${el.bgColor}40; ${borderStyle}">${el.content}</${el.type}>\n`;
+            });
+            
+            htmlContent += '</body>\n</html>';
+            
+            const blob = new Blob([htmlContent], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'generated-elements.html';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            showToast('HTML exported successfully!');
+        }
+
+        // Copy code to clipboard
+        function copyCode() {
+            if (elements.length === 0) {
+                showToast('No code to copy', 'info');
+                return;
+            }
+            
+            let html = '';
+            elements.forEach(el => {
+                const borderStyle = el.addBorder ? `border: 2px solid ${el.bgColor};` : '';
+                html += `<${el.type} style="color: ${el.textColor}; background-color: ${el.bgColor}40; ${borderStyle}">${el.content}</${el.type}>\n`;
+            });
+            
+            navigator.clipboard.writeText(html)
+                .then(() => showToast('Code copied to clipboard!'))
+                .catch(() => showToast('Failed to copy code', 'error'));
+        }
+
+        // Search elements
+        function searchElements(searchTerm) {
+            const searchLower = searchTerm.toLowerCase();
+            const wrappers = document.querySelectorAll('#result > div');
+            
+            let visibleCount = 0;
+            
+            wrappers.forEach(wrapper => {
+                const element = wrapper.querySelector('.preview-element');
+                const content = element.textContent.toLowerCase();
+                const type = element.tagName.toLowerCase();
+                
+                if (content.includes(searchLower) || type.includes(searchLower)) {
+                    wrapper.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    wrapper.style.display = 'none';
+                }
+            });
+            
+            // Show/hide empty state based on search results
+            const emptyState = document.getElementById('emptyState');
+            if (visibleCount === 0 && searchTerm.trim() !== '') {
+                emptyState.style.display = 'block';
+                emptyState.innerHTML = `
+                    <div class="w-16 h-16 lg:w-24 lg:h-24 mx-auto mb-4 lg:mb-6 rounded-full bg-gradient-to-r from-yellow-500 to-orange-600 flex items-center justify-center">
+                        <i class="fas fa-search text-white text-2xl lg:text-4xl"></i>
+                    </div>
+                    <h3 class="text-lg lg:text-xl text-gray-800 dark:text-white mb-2">No matching elements</h3>
+                    <p class="text-gray-600 dark:text-gray-400 max-w-md mx-auto px-4">No elements found matching "${searchTerm}"</p>
+                `;
+            } else if (visibleCount === 0 && searchTerm.trim() === '') {
+                emptyState.style.display = 'block';
+                emptyState.innerHTML = `
+                    <div class="w-16 h-16 lg:w-24 lg:h-24 mx-auto mb-4 lg:mb-6 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
+                        <i class="fas fa-code text-white text-2xl lg:text-4xl"></i>
+                    </div>
+                    <h3 class="text-lg lg:text-xl text-gray-800 dark:text-white mb-2">No elements created yet</h3>
+                    <p class="text-gray-600 dark:text-gray-400 max-w-md mx-auto px-4">Start creating HTML elements using the form on the left. Your creations will appear here in real-time.</p>
+                `;
+            } else {
+                emptyState.style.display = 'none';
+            }
+        }
+
+        // Show toast notification
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            
+            // Set message and color
+            toastMessage.textContent = message;
+            
+            // Remove previous color classes
+            toast.className = toast.className.replace(/bg-(green|red|yellow|blue|purple)-600/, '');
+            
+            switch(type) {
+                case 'error':
+                    toast.classList.add('bg-red-600');
+                    break;
+                case 'warning':
+                    toast.classList.add('bg-yellow-600');
+                    break;
+                case 'info':
+                    toast.classList.add('bg-blue-600');
+                    break;
+                default:
+                    toast.classList.add('bg-green-600');
+            }
+            
+            // Show toast
+            toast.classList.remove('hidden');
+            
+            // Hide after 3 seconds
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3000);
+        }
+    </script>
 </body>
 </html>
