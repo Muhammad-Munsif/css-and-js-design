@@ -1,113 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-        <link rel="stylesheet" href="css/index.css">
-        <style>
-        body{
- padding: 0px;
- margin: 0px;
- box-sizing: border-box;
-}
 
-#container{
-    width: 100%;
-    height: 100vh;
-}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="css/index.css">
+    <style>
+        body {
+            padding: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+        }
 
-#sidenav{
-    position: fixed;
-    width: 350px;
-    height: 100%;
-    background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
-}
+        #container {
+            width: 100%;
+            height: 100vh;
+        }
 
-#section{
-   height: 100vh;
-   margin-left: 350px;
-   width: calc(100% - 350px);
-   display: flex;
-}
+        #sidenav {
+            position: fixed;
+            width: 350px;
+            height: 100%;
+            background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+        }
 
-#element-card{
-    display: flex;
-    flex-direction: column;
-}
+        #section {
+            height: 100vh;
+            margin-left: 350px;
+            width: calc(100% - 350px);
+            display: flex;
+        }
 
-#element-card h1{
-    font-family: sans-serif;
-    color: #fff;
-}
+        #element-card {
+            display: flex;
+            flex-direction: column;
+        }
 
-#element-card form{
-    display: flex;
-    flex-direction:column ;
-    gap: 16px;
-}
+        #element-card h1 {
+            font-family: sans-serif;
+            color: #fff;
+        }
 
-#element-card form select, #element-card input, #element-card button{
-    padding: 12px;
-    border: none;
-}
+        #element-card form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
 
-#element-card form button{
-    width: fit-content;
-    padding-left: 20px;
-    padding-right: 20px;
-    border-radius: 4px;
-    background: darkorange;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-}
+        #element-card form select,
+        #element-card input,
+        #element-card button {
+            padding: 12px;
+            border: none;
+        }
 
-        </style>
-        <script src="js/index.js">
-            function myFun(event){
-    event.preventDefault();
-    var form = document.forms.elementForm;
-     console.log(form.elements)
-    var elementName = form.elements.element.value;
-    var text = form.elements.text.value;
-    var tag = document.createElement(elementName);
-    tag.innerHTML = text;
-    var result = document.getElementById("result");
-    result.append(tag);
+        #element-card form button {
+            width: fit-content;
+            padding-left: 20px;
+            padding-right: 20px;
+            border-radius: 4px;
+            background: darkorange;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+    <script src="js/index.js">
+        function myFun(event) {
+            event.preventDefault();
+            var form = document.forms.elementForm;
+            console.log(form.elements)
+            var elementName = form.elements.element.value;
+            var text = form.elements.text.value;
+            var tag = document.createElement(elementName);
+            tag.innerHTML = text;
+            var result = document.getElementById("result");
+            result.append(tag);
 
-}
-
-
-        </script>
+        }
+    </script>
 
 </head>
+
 <body>
     <div id="container">
         <div id="sidenav">
             <div id="element-card">
                 <h1>Element Creator</h1>
-            <form onsubmit="myFun(event)" name="elementForm">
-                <select name="element" class="bg-white">
-                    <option value="h1">Heading</option>
-                    <option value="p">paragraph</option>~
-                    <option value="div">Div</option>
-                    <option value="button">button tag</option>
-                    <option value="span">span</option>
-                </select>
-                <input type="text" placeholder="Enter html tag name" name="text" required="true" class="bg-white">
-                <button onclick="myFun(event)">Create</button>
-            </form>
+                <form onsubmit="myFun(event)" name="elementForm">
+                    <select name="element" class="bg-white">
+                        <option value="h1">Heading</option>
+                        <option value="p">paragraph</option>~
+                        <option value="div">Div</option>
+                        <option value="button">button tag</option>
+                        <option value="span">span</option>
+                    </select>
+                    <input type="text" placeholder="Enter html tag name" name="text" required="true" class="bg-white">
+                    <button onclick="myFun(event)">Create</button>
+                </form>
+            </div>
+        </div>
+        <div id="section">
+            <div>
+                <h1 class="p-4 font-semibold">Element Preview</h1>
+                <div id="result" class="ml-20 text-white font-semibold"></div>
+            </div>
+
         </div>
     </div>
-    <div id="section">
-        <div>
-            <h1 class="p-4 font-semibold">Element Preview</h1>
-            <div id="result" class="ml-20 text-white font-semibold"></div>
-        </div>
-        
-    </div>
-</div>
 </body>
+
 </html>
