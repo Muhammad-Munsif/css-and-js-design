@@ -35,53 +35,6 @@ body {
   position: relative;
 }
 
-.neon-border::before {
-  content: "";
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  background: linear-gradient(45deg, #4361ee, #3a0ca3, #f72585);
-  border-radius: 12px;
-  z-index: -1;
-  opacity: 0.7;
-  filter: blur(5px);
-}
-
-.gradient-bg {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-}
-
-.card-hover {
-  transition: all 0.3s ease;
-}
-
-.card-hover:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-}
-
-.btn-gradient {
-  background: linear-gradient(45deg, #4361ee, #3a0ca3);
-  transition: all 0.3s ease;
-}
-
-.btn-gradient:hover {
-  background: linear-gradient(45deg, #3a0ca3, #4361ee);
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
-}
-
-.element-tag {
-  background: rgba(67, 97, 238, 0.1);
-  border-left: 4px solid #4361ee;
-  padding: 8px 12px;
-  border-radius: 4px;
-  margin: 5px 0;
-  font-family: "Courier New", monospace;
-}
-
 .preview-element {
   animation: fadeIn 0.5s ease;
   border: 1px dashed #4361ee;
@@ -90,6 +43,7 @@ body {
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.05);
   transition: all 0.3s ease;
+  position: relative;
 }
 
 .preview-element:hover {
@@ -108,22 +62,6 @@ body {
   }
 }
 
-.pulse {
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0% {
-    box-shadow: 0 0 0 0 rgba(67, 97, 238, 0.7);
-  }
-  70% {
-    box-shadow: 0 0 0 10px rgba(67, 97, 238, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(67, 97, 238, 0);
-  }
-}
-
 .custom-scrollbar::-webkit-scrollbar {
   width: 8px;
 }
@@ -136,15 +74,6 @@ body {
 .custom-scrollbar::-webkit-scrollbar-thumb {
   background: linear-gradient(45deg, #4361ee, #3a0ca3);
   border-radius: 10px;
-}
-
-.tag-badge {
-  background: linear-gradient(45deg, #f72585, #b5179e);
-  color: white;
-  padding: 3px 8px;
-  border-radius: 12px;
-  font-size: 0.75rem;
-  font-weight: 600;
 }
 
 .status-dot {
@@ -171,4 +100,24 @@ body {
   100% {
     box-shadow: 0 0 0 0 rgba(74, 222, 128, 0);
   }
+}
+
+.card-hover {
+  transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.btn-gradient {
+  background: linear-gradient(45deg, #4361ee, #3a0ca3);
+  transition: all 0.3s ease;
+}
+
+.btn-gradient:hover {
+  background: linear-gradient(45deg, #3a0ca3, #4361ee);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
 }
