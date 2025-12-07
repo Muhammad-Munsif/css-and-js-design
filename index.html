@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Element Creator | Playground</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #f72585;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4cc9f0;
+            --warning: #f8961e;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        .neon-border {
+            border: 2px solid transparent;
+            background: linear-gradient(45deg, #4361ee, #3a0ca3, #f72585) border-box;
+            border-radius: 10px;
+            position: relative;
+        }
+        
+        .neon-border::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #4361ee, #3a0ca3, #f72585);
+            border-radius: 12px;
+            z-index: -1;
+            opacity: 0.7;
+            filter: blur(5px);
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-gradient {
+            background: linear-gradient(45deg, #4361ee, #3a0ca3);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-gradient:hover {
+            background: linear-gradient(45deg, #3a0ca3, #4361ee);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
+        }
+        
+        .element-tag {
+            background: rgba(67, 97, 238, 0.1);
+            border-left: 4px solid #4361ee;
+            padding: 8px 12px;
+            border-radius: 4px;
+            margin: 5px 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .preview-element {
+            animation: fadeIn 0.5s ease;
+            border: 1px dashed #4361ee;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .preview-element:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(1.01);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(67, 97, 238, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(67, 97, 238, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(67, 97, 238, 0); }
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, #4361ee, #3a0ca3);
+            border-radius: 10px;
+        }
+        
+        .tag-badge {
+            background: linear-gradient(45deg, #f72585, #b5179e);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+        }
+        
+        .live {
+            background: #4ade80;
+            box-shadow: 0 0 0 0 rgba(74, 222, 128, 1);
+            animation: pulse-green 2s infinite;
+        }
+        
+        @keyframes pulse-green {
+            0% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(74, 222, 128, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
+        }
+    </style>
+</head>
+
+<body class="text-gray-800">
+    <div class="min-h-screen flex">
+        <!-- Sidebar -->
+        <div class="w-96 glass-effect p-6 shadow-xl flex flex-col" id="sidenav">
+            <!-- Header -->
+            <div class="mb-8">
+                <div class="flex items-center mb-2">
+                    <div class="w-10 h-10 rounded-lg gradient-bg flex items-center justify-center mr-3">
+                        <i class="fas fa-code text-white text-xl"></i>
+                    </div>
+                    <h1 class="text-2xl font-bold text-white">HTML Creator</h1>
+                </div>
+                <p class="text-gray-200 text-sm">Create HTML elements dynamically with live preview</p>
+                <div class="flex items-center mt-3">
+                    <span class="status-dot live"></span>
+                    <span class="text-green-300 text-sm font-medium">Live Preview Active</span>
+                </div>
+            </div>
+
+            <!-- Form Card -->
+            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 mb-6 card-hover">
+                <h2 class="text-xl font-semibold text-white mb-4 flex items-center">
+                    <i class="fas fa-plus-circle mr-2 text-blue-300"></i> Create New Element
+                </h2>
+                
+                <form onsubmit="createElement(event)" name="elementForm" class="space-y-5">
+                    <!-- Element Type Selection -->
+                    <div>
+                        <label class="block text-gray-200 mb-2 font-medium">
+                            <i class="fas fa-tag mr-2"></i>Element Type
+                        </label>
+                        <div class="grid grid-cols-3 gap-2 mb-3">
+                            <button type="button" onclick="selectElement('h1')" class="element-btn p-3 rounded-lg bg-blue-500/20 border border-blue-400/30 text-white text-center hover:bg-blue-500/40 transition">
+                                <i class="fas fa-heading mb-1 block text-lg"></i> H1
+                            </button>
+                            <button type="button" onclick="selectElement('p')" class="element-btn p-3 rounded-lg bg-green-500/20 border border-green-400/30 text-white text-center hover:bg-green-500/40 transition">
+                                <i class="fas fa-paragraph mb-1 block text-lg"></i> P
+                            </button>
+                            <button type="button" onclick="selectElement('button')" class="element-btn p-3 rounded-lg bg-purple-500/20 border border-purple-400/30 text-white text-center hover:bg-purple-500/40 transition">
+                                <i class="fas fa-square mb-1 block text-lg"></i> Button
+                            </button>
+                            <button type="button" onclick="selectElement('div')" class="element-btn p-3 rounded-lg bg-yellow-500/20 border border-yellow-400/30 text-white text-center hover:bg-yellow-500/40 transition">
+                                <i class="fas fa-square-full mb-1 block text-lg"></i> Div
+                            </button>
+                            <button type="button" onclick="selectElement('span')" class="element-btn p-3 rounded-lg bg-pink-500/20 border border-pink-400/30 text-white text-center hover:bg-pink-500/40 transition">
+                                <i class="fas fa-i-cursor mb-1 block text-lg"></i> Span
+                            </button>
+                            <button type="button" onclick="selectElement('a')" class="element-btn p-3 rounded-lg bg-red-500/20 border border-red-400/30 text-white text-center hover:bg-red-500/40 transition">
+                                <i class="fas fa-link mb-1 block text-lg"></i> Link
+                            </button>
+                        </div>
+                        
+                        <select name="element" id="elementSelect" class="w-full p-3 rounded-lg bg-white/90 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <option value="" disabled selected>Or select from dropdown</option>
+                            <option value="h1">Heading 1 (h1)</option>
+                            <option value="h2">Heading 2 (h2)</option>
+                            <option value="h3">Heading 3 (h3)</option>
+                            <option value="h4">Heading 4 (h4)</option>
+                            <option value="h5">Heading 5 (h5)</option>
+                            <option value="h6">Heading 6 (h6)</option>
+                            <option value="p">Paragraph (p)</option>
+                            <option value="div">Division (div)</option>
+                            <option value="span">Span (span)</option>
+                            <option value="button">Button (button)</option>
+                            <option value="a">Anchor/Link (a)</option>
+                            <option value="ul">Unordered List (ul)</option>
+                            <option value="ol">Ordered List (ol)</option>
+                            <option value="li">List Item (li)</option>
+                        </select>
+                    </div>
+
+                    <!-- Content Input -->
+                    <div>
+                        <label class="block text-gray-200 mb-2 font-medium">
+                            <i class="fas fa-align-left mr-2"></i>Element Content
+                        </label>
+                        <input type="text" id="contentInput" name="text" placeholder="Enter your content here..." 
+                               class="w-full p-3 rounded-lg bg-white/90 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+
+                    <!-- Additional Options -->
+                    <div class="bg-white/5 rounded-lg p-4">
+                        <h3 class="text-gray-200 mb-3 font-medium flex items-center">
+                            <i class="fas fa-sliders-h mr-2"></i>Additional Options
+                        </h3>
+                        
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-gray-200 text-sm mb-1">Text Color</label>
+                                <input type="color" id="textColor" value="#ffffff" class="w-full h-10 rounded cursor-pointer">
+                            </div>
+                            <div>
+                                <label class="block text-gray-200 text-sm mb-1">Background</label>
+                                <input type="color" id="bgColor" value="#4361ee" class="w-full h-10 rounded cursor-pointer">
+                            </div>
+                        </div>
+                        
+                        <div class="mt-3">
+                            <label class="inline-flex items-center text-gray-200">
+                                <input type="checkbox" id="addBorder" class="rounded text-blue-500">
+                                <span class="ml-2 text-sm">Add Border</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="flex space-x-3 pt-2">
+                        <button type="submit" class="flex-1 btn-gradient text-white font-semibold py-3 px-6 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-plus mr-2"></i> Create Element
+                        </button>
+                        <button type="button" onclick="clearAll()" class="px-6 py-3 bg-red-500/20 text-red-300 border border-red-400/30 rounded-lg hover:bg-red-500/40 transition">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Stats Card -->
+            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-5">
+                <h3 class="text-gray-200 mb-3 font-medium flex items-center">
+                    <i class="fas fa-chart-bar mr-2"></i>Creation Stats
+                </h3>
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="bg-blue-500/20 rounded-lg p-3 text-center">
+                        <div class="text-white text-2xl font-bold" id="totalElements">0</div>
+                        <div class="text-blue-200 text-xs">Total Elements</div>
+                    </div>
+                    <div class="bg-green-500/20 rounded-lg p-3 text-center">
+                        <div class="text-white text-2xl font-bold" id="lastElement">None</div>
+                        <div class="text-green-200 text-xs">Last Created</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 p-8 overflow-auto custom-scrollbar" id="section">
+            <!-- Header -->
+            <div class="mb-8">
+                <h1 class="text-3xl font-bold text-white mb-2 flex items-center">
+                    <i class="fas fa-eye mr-3 text-blue-300"></i> Live Element Preview
+                </h1>
+                <p class="text-gray-300">Watch your HTML elements come to life in real-time</p>
+                
+                <div class="flex items-center mt-4 space-x-4">
+                    <button onclick="exportHTML()" class="px-4 py-2 bg-green-500/20 text-green-300 border border-green-400/30 rounded-lg hover:bg-green-500/40 transition flex items-center">
+                        <i class="fas fa-download mr-2"></i> Export HTML
+                    </button>
+                    <button onclick="toggleEditMode()" id="editModeBtn" class="px-4 py-2 bg-purple-500/20 text-purple-300 border border-purple-400/30 rounded-lg hover:bg-purple-500/40 transition flex items-center">
+                        <i class="fas fa-edit mr-2"></i> Edit Mode
+                    </button>
+                    <div class="ml-auto">
+                        <input type="text" id="searchElements" placeholder="Search elements..." 
+                               class="p-2 rounded-lg bg-white/10 border border-gray-300/30 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Preview Area -->
+            <div class="bg-black/30 rounded-xl p-6 min-h-[400px] neon-border">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-xl font-semibold text-white flex items-center">
+                        <i class="fas fa-code mr-2 text-yellow-400"></i> Generated Elements
+                    </h2>
+                    <div class="text-gray-300">
+                        <span id="elementCount">0 elements</span>
+                    </div>
+                </div>
+                
+                <!-- No Elements Message -->
+                <div id="emptyState" class="text-center py-16">
+                    <div class="w-24 h-24 mx-auto mb-6 rounded-full gradient-bg flex items-center justify-center">
+                        <i class="fas fa-code text-white text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl text-white mb-2">No elements created yet</h3>
+                    <p class="text-gray-400 max-w-md mx-auto">Start creating HTML elements using the form on the left. Your creations will appear here in real-time.</p>
+                </div>
+                
+                <!-- Elements Container -->
+                <div id="result" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Elements will be dynamically added here -->
+                </div>
+            </div>
+
+            <!-- Code Preview -->
+            <div class="mt-8 bg-gray-900/80 rounded-xl p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-xl font-semibold text-white flex items-center">
+                        <i class="fas fa-file-code mr-2 text-green-400"></i> Generated HTML Code
+                    </h3>
+                    <button onclick="copyCode()" class="px-4 py-2 bg-blue-500/20 text-blue-300 border border-blue-400/30 rounded-lg hover:bg-blue-500/40 transition flex items-center">
+                        <i class="fas fa-copy mr-2"></i> Copy Code
+                    </button>
+                </div>
+                <pre id="codePreview" class="bg-gray-800 p-4 rounded-lg text-gray-200 overflow-x-auto text-sm custom-scrollbar">
+&lt;!-- Generated HTML will appear here --&gt;</pre>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-4 right-4 bg-green-600 text-white p-4 rounded-lg shadow-lg transform translate-y-16 transition-transform duration-300 hidden">
+        <div class="flex items-center">
+            <i class="fas fa-check-circle mr-2"></i>
+            <span id="toastMessage">Element created successfully!</span>
+        </div>
+    </div>
+
+    <script>
+        // State management
+        let elements = [];
+        let editMode = false;
+        let totalElements = 0;
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateStats();
+            loadFromStorage();
+        });
+
+        // Select element from quick buttons
+        function selectElement(type) {
+            document.getElementById('elementSelect').value = type;
+            
+            // Highlight selected button
+            document.querySelectorAll('.element-btn').forEach(btn => {
+                btn.classList.remove('ring-2', 'ring-blue-400');
+            });
+            event.target.classList.add('ring-2', 'ring-blue-400');
+        }
+
+        // Create new element
+        function createElement(event) {
+            event.preventDefault();
+            
+            const form = document.forms.elementForm;
+            const elementName = form.elements.element.value;
+            const text = form.elements.text.value;
+            
+            if (!elementName || !text) {
+                showToast('Please fill all fields', 'error');
+                return;
+            }
+            
+            // Create element
+            const tag = document.createElement(elementName);
+            tag.innerHTML = text;
+            tag.className = 'preview-element';
+            
+            // Apply styles
+            const textColor = document.getElementById('textColor').value;
+            const bgColor = document.getElementById('bgColor').value;
+            const addBorder = document.getElementById('addBorder').checked;
+            
+            tag.style.color = textColor;
+            tag.style.backgroundColor = bgColor + '20'; // Add transparency
+            tag.style.border = addBorder ? `2px solid ${bgColor}` : 'none';
+            tag.style.padding = '15px';
+            tag.style.borderRadius = '8px';
+            tag.style.margin = '10px 0';
+            
+            // Add metadata
+            tag.dataset.id = Date.now();
+            tag.dataset.type = elementName;
+            tag.dataset.content = text;
+            
+            // Add delete button to element
+            const deleteBtn = document.createElement('button');
+            deleteBtn.innerHTML = '<i class="fas fa-times"></i>';
+            deleteBtn.className = 'absolute top-2 right-2 text-red-400 hover:text-red-300 transition opacity-0 group-hover:opacity-100';
+            deleteBtn.onclick = function() {
+                deleteElement(tag.dataset.id);
+            };
+            
+            const wrapper = document.createElement('div');
+            wrapper.className = 'relative group';
+            wrapper.appendChild(tag);
+            wrapper.appendChild(deleteBtn);
+            
+            // Add to result container
+            const resultDiv = document.getElementById('result');
+            resultDiv.appendChild(wrapper);
+            
+            // Hide empty state
+            document.getElementById('emptyState').style.display = 'none';
+            
+            // Update element count
+            totalElements++;
+            updateStats();
+            
+            // Save to storage
+            elements.push({
+                id: tag.dataset.id,
+                type: elementName,
+                content: text,
+                styles: { textColor, bgColor, addBorder }
+            });
+            saveToStorage();
+            
+            // Update code preview
+            updateCodePreview();
+            
+            // Show success message
+            showToast(`${elementName.toUpperCase()} element created successfully!`);
+            
+            // Clear form
+            form.reset();
+        }
+
+        // Delete element
+        function deleteElement(id) {
+            const element = document.querySelector(`[data-id="${id}"]`);
+            if (element) {
+                element.parentElement.remove();
+                
+                // Remove from array
+                elements = elements.filter(el => el.id !== id);
+                saveToStorage();
+                
+                // Update stats
+                totalElements = elements.length;
+                updateStats();
+                updateCodePreview();
+                
+                // Show empty state if no elements
+                if (totalElements === 0) {
+                    document.getElementById('emptyState').style.display = 'block';
+                }
+                
+                showToast('Element deleted', 'warning');
+            }
+        }
+
+        // Clear all elements
+        function clearAll() {
+            if (confirm('Are you sure you want to delete all elements?')) {
+                document.getElementById('result').innerHTML = '';
+                elements = [];
+                totalElements = 0;
+                saveToStorage();
+                updateStats();
+                updateCodePreview();
+                document.getElementById('emptyState').style.display = 'block';
+                showToast('All elements cleared', 'warning');
+            }
+        }
+
+        // Export HTML
+        function exportHTML() {
+            const htmlContent = document.getElementById('result').innerHTML;
+            const blob = new Blob([htmlContent], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'generated-elements.html';
+            a.click();
+            showToast('HTML exported successfully!');
+        }
+
+        // Toggle edit mode
+        function toggleEditMode() {
+            editMode = !editMode;
+            const btn = document.getElementById('editModeBtn');
+            if (editMode) {
+                btn.innerHTML = '<i class="fas fa-times mr-2"></i> Exit Edit Mode';
+                btn.classList.add('bg-red-500/20', 'text-red-300', 'border-red-400/30');
+                btn.classList.remove('bg-purple-500/20', 'text-purple-300', 'border-purple-400/30');
+                showToast('Edit mode enabled - click elements to edit');
+            } else {
+                btn.innerHTML = '<i class="fas fa-edit mr-2"></i> Edit Mode';
+                btn.classList.remove('bg-red-500/20', 'text-red-300', 'border-red-400/30');
+                btn.classList.add('bg-purple-500/20', 'text-purple-300', 'border-purple-400/30');
+            }
+        }
+
+        // Update stats
+        function updateStats() {
+            document.getElementById('totalElements').textContent = totalElements;
+            document.getElementById('elementCount').textContent = `${totalElements} element${totalElements !== 1 ? 's' : ''}`;
+            
+            if (elements.length > 0) {
+                const last = elements[elements.length - 1];
+                document.getElementById('lastElement').textContent = `<${last.type}>`;
+            }
+        }
+
+        // Update code preview
+        function updateCodePreview() {
+            let html = '';
+            elements.forEach(el => {
+                html += `&lt;${el.type}&gt;${el.content}&lt;/${el.type}&gt;\n`;
+            });
+            document.getElementById('codePreview').textContent = html || '<!-- No elements generated yet -->';
+        }
+
+        // Copy code to clipboard
+        function copyCode() {
+            const code = document.getElementById('codePreview').textContent;
+            navigator.clipboard.writeText(code.replace(/&lt;/g, '<').replace(/&gt;/g, '>'))
+                .then(() => showToast('Code copied to clipboard!'))
+                .catch(() => showToast('Failed to copy code', 'error'));
+        }
+
+        // Show toast notification
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            
+            // Set message and color
+            toastMessage.textContent = message;
+            toast.className = toast.className.replace(/bg-(green|red|yellow)-600/, '');
+            
+            switch(type) {
+                case 'error':
+                    toast.classList.add('bg-red-600');
+                    break;
+                case 'warning':
+                    toast.classList.add('bg-yellow-600');
+                    break;
+                default:
+                    toast.classList.add('bg-green-600');
+            }
+            
+            // Show toast
+            toast.classList.remove('hidden');
+            toast.classList.remove('translate-y-16');
+            toast.classList.add('translate-y-0');
+            
+            // Hide after 3 seconds
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0');
+                toast.classList.add('translate-y-16');
+                setTimeout(() => toast.classList.add('hidden'), 300);
+            }, 3000);
+        }
+
+        // Save to localStorage
+        function saveToStorage() {
+            localStorage.setItem('htmlElements', JSON.stringify(elements));
+        }
+
+        // Load from localStorage
+        function loadFromStorage() {
+            const saved = localStorage.getItem('htmlElements');
+            if (saved) {
+                elements = JSON.parse(saved);
+                totalElements = elements.length;
+                
+                // Recreate elements
+                elements.forEach(el => {
+                    const form = document.forms.elementForm;
+                    form.elements.element.value = el.type;
+                    form.elements.text.value = el.content;
+                    
+                    // Trigger creation without showing toast
+                    const tempEvent = { preventDefault: () => {} };
+                    createElement(tempEvent);
+                });
+                
+                // Clear form
+                form.reset();
+                
+                if (totalElements > 0) {
+                    document.getElementById('emptyState').style.display = 'none';
+                    updateStats();
+                    updateCodePreview();
+                }
+            }
+        }
+
+        // Search elements
+        document.getElementById('searchElements').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const elements = document.querySelectorAll('.preview-element');
+            
+            elements.forEach(el => {
+                const content = el.textContent.toLowerCase();
+                const type = el.tagName.toLowerCase();
+                
+                if (content.includes(searchTerm) || type.includes(searchTerm)) {
+                    el.parentElement.style.display = 'block';
+                } else {
+                    el.parentElement.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
