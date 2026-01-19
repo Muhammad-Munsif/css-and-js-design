@@ -1,240 +1,241 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HTML Element Creator | Playground</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-   <link rel="stylesheet" href="css/index.css">
-   <style>
-    :root {
-  --primary-light: #4361ee;
-  --secondary-light: #3a0ca3;
-  --bg-light: #f8fafc;
-  --text-light: #1e293b;
-  --card-light: #ffffff;
+    <link rel="stylesheet" href="css/index.css">
+    <style>
+        :root {
+            --primary-light: #4361ee;
+            --secondary-light: #3a0ca3;
+            --bg-light: #f8fafc;
+            --text-light: #1e293b;
+            --card-light: #ffffff;
 
-  --primary-dark: #818cf8;
-  --secondary-dark: #4f46e5;
-  --bg-dark: #0f172a;
-  --text-dark: #f1f5f9;
-  --card-dark: #1e293b;
-}
+            --primary-dark: #818cf8;
+            --secondary-dark: #4f46e5;
+            --bg-dark: #0f172a;
+            --text-dark: #f1f5f9;
+            --card-dark: #1e293b;
+        }
 
-.light-mode {
-  --primary: var(--primary-light);
-  --secondary: var(--secondary-light);
-  --bg: var(--bg-light);
-  --text: var(--text-light);
-  --card: var(--card-light);
-  --border: #e2e8f0;
-  --shadow: rgba(0, 0, 0, 0.1);
-}
+        .light-mode {
+            --primary: var(--primary-light);
+            --secondary: var(--secondary-light);
+            --bg: var(--bg-light);
+            --text: var(--text-light);
+            --card: var(--card-light);
+            --border: #e2e8f0;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
 
-.dark-mode {
-  --primary: var(--primary-dark);
-  --secondary: var(--secondary-dark);
-  --bg: var(--bg-dark);
-  --text: var(--text-dark);
-  --card: var(--card-dark);
-  --border: #334155;
-  --shadow: rgba(0, 0, 0, 0.3);
-}
+        .dark-mode {
+            --primary: var(--primary-dark);
+            --secondary: var(--secondary-dark);
+            --bg: var(--bg-dark);
+            --text: var(--text-dark);
+            --card: var(--card-dark);
+            --border: #334155;
+            --shadow: rgba(0, 0, 0, 0.3);
+        }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
 
-body {
-  background-color: var(--bg);
-  color: var(--text);
-  min-height: 100vh;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-}
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-.theme-transition {
-  transition: all 0.3s ease;
-}
+        .theme-transition {
+            transition: all 0.3s ease;
+        }
 
-.preview-element {
-  animation: fadeIn 0.5s ease;
-  border: 2px dashed var(--primary);
-  padding: 1rem;
-  margin: 0.5rem 0;
-  border-radius: 0.5rem;
-  background-color: rgba(var(--primary-rgb), 0.05);
-  position: relative;
-  transition: all 0.3s ease;
-}
+        .preview-element {
+            animation: fadeIn 0.5s ease;
+            border: 2px dashed var(--primary);
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 0.5rem;
+            background-color: rgba(var(--primary-rgb), 0.05);
+            position: relative;
+            transition: all 0.3s ease;
+        }
 
-.dark-mode .preview-element {
-  background-color: rgba(255, 255, 255, 0.05);
-}
+        .dark-mode .preview-element {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
 
-.glass-effect {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-.dark-mode .glass-effect {
-  background: rgba(30, 41, 59, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
 
-/* Mobile menu animation */
-.mobile-menu {
-  transform: translateX(-100%);
-  transition: transform 0.3s ease;
-}
+        .dark-mode .glass-effect {
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
 
-.mobile-menu.active {
-  transform: translateX(0);
-}
+        /* Mobile menu animation */
+        .mobile-menu {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
 
-/* Responsive design */
-@media (max-width: 768px) {
-  .container {
-    flex-direction: column;
-  }
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
 
-  #sidenav {
-    width: 100%;
-    position: relative;
-    height: auto;
-  }
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
 
-  #section {
-    margin-left: 0;
-    width: 100%;
-  }
+            #sidenav {
+                width: 100%;
+                position: relative;
+                height: auto;
+            }
 
-  .grid-cols-3 {
-    grid-template-columns: repeat(2, 1fr) !important;
-  }
+            #section {
+                margin-left: 0;
+                width: 100%;
+            }
 
-  .stats-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
-  }
-}
+            .grid-cols-3 {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
 
-@media (max-width: 480px) {
-  .grid-cols-3 {
-    grid-template-columns: 1fr !important;
-  }
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+        }
 
-  .stats-grid {
-    grid-template-columns: 1fr !important;
-  }
+        @media (max-width: 480px) {
+            .grid-cols-3 {
+                grid-template-columns: 1fr !important;
+            }
 
-  .flex-wrap-mobile {
-    flex-wrap: wrap;
-  }
+            .stats-grid {
+                grid-template-columns: 1fr !important;
+            }
 
-  .space-x-4 > * {
-    margin-right: 0.5rem !important;
-    margin-bottom: 0.5rem !important;
-  }
-}
+            .flex-wrap-mobile {
+                flex-wrap: wrap;
+            }
 
-/* Scrollbar styling */
-::-webkit-scrollbar {
-  width: 8px;
-}
+            .space-x-4>* {
+                margin-right: 0.5rem !important;
+                margin-bottom: 0.5rem !important;
+            }
+        }
 
-::-webkit-scrollbar-track {
-  background: var(--border);
-  border-radius: 4px;
-}
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
 
-::-webkit-scrollbar-thumb {
-  background: var(--primary);
-  border-radius: 4px;
-}
+        ::-webkit-scrollbar-track {
+            background: var(--border);
+            border-radius: 4px;
+        }
 
-::-webkit-scrollbar-thumb:hover {
-  background: var(--secondary);
-}
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+        }
 
-/* Theme toggle switch */
-.theme-switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 30px;
-}
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary);
+        }
 
-.theme-switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
+        /* Theme toggle switch */
+        .theme-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+        }
 
-.theme-slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  transition: 0.4s;
-  border-radius: 34px;
-}
+        .theme-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
 
-.theme-slider:before {
-  position: absolute;
-  content: "";
-  height: 22px;
-  width: 22px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  transition: 0.4s;
-  border-radius: 50%;
-}
+        .theme-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: 0.4s;
+            border-radius: 34px;
+        }
 
-input:checked + .theme-slider {
-  background-color: var(--primary);
-}
+        .theme-slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: 0.4s;
+            border-radius: 50%;
+        }
 
-input:checked + .theme-slider:before {
-  transform: translateX(30px);
-}
+        input:checked+.theme-slider {
+            background-color: var(--primary);
+        }
 
-.theme-slider i {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 12px;
-}
+        input:checked+.theme-slider:before {
+            transform: translateX(30px);
+        }
 
-.theme-slider .fa-sun {
-  left: 8px;
-  color: #f39c12;
-}
+        .theme-slider i {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 12px;
+        }
 
-.theme-slider .fa-moon {
-  right: 8px;
-  color: #34495e;
-}
+        .theme-slider .fa-sun {
+            left: 8px;
+            color: #f39c12;
+        }
 
-   </style>
+        .theme-slider .fa-moon {
+            right: 8px;
+            color: #34495e;
+        }
+    </style>
 </head>
 
 <body class="light-mode">
@@ -251,7 +252,7 @@ input:checked + .theme-slider:before {
             <button id="closeMobileMenu" class="absolute top-4 right-4 text-gray-600 dark:text-gray-300">
                 <i class="fas fa-times text-2xl"></i>
             </button>
-            
+
             <!-- Mobile Sidebar Content -->
             <div class="mt-8">
                 <!-- Theme Toggle -->
@@ -279,12 +280,13 @@ input:checked + .theme-slider:before {
             <div class="mb-8">
                 <div class="flex items-center justify-between mb-4">
                     <div class="flex items-center">
-                        <div class="w-10 h-10 rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center mr-3">
+                        <div
+                            class="w-10 h-10 rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center mr-3">
                             <i class="fas fa-code text-white text-xl"></i>
                         </div>
                         <h1 class="text-xl lg:text-2xl font-bold text-gray-800 dark:text-white">HTML Creator</h1>
                     </div>
-                    
+
                     <!-- Theme Toggle for Desktop -->
                     <label class="theme-switch">
                         <input type="checkbox" id="themeToggle">
@@ -294,8 +296,9 @@ input:checked + .theme-slider:before {
                         </span>
                     </label>
                 </div>
-                
-                <p class="text-gray-600 dark:text-gray-300 text-sm">Create HTML elements dynamically with live preview</p>
+
+                <p class="text-gray-600 dark:text-gray-300 text-sm">Create HTML elements dynamically with live preview
+                </p>
                 <div class="flex items-center mt-3">
                     <div class="w-3 h-3 rounded-full bg-green-500 animate-pulse mr-2"></div>
                     <span class="text-green-600 dark:text-green-400 text-sm font-medium">Live Preview Active</span>
@@ -303,40 +306,48 @@ input:checked + .theme-slider:before {
             </div>
 
             <!-- Form Card -->
-            <div class="bg-white dark:bg-gray-800 rounded-xl p-4 lg:p-6 mb-6 shadow-lg border border-gray-200 dark:border-gray-700 theme-transition">
+            <div
+                class="bg-white dark:bg-gray-800 rounded-xl p-4 lg:p-6 mb-6 shadow-lg border border-gray-200 dark:border-gray-700 theme-transition">
                 <h2 class="text-lg lg:text-xl font-semibold text-gray-800 dark:text-white mb-4 flex items-center">
                     <i class="fas fa-plus-circle mr-2 text-blue-500 dark:text-blue-400"></i> Create New Element
                 </h2>
-                
+
                 <form id="elementForm" class="space-y-4 lg:space-y-5">
                     <!-- Element Type Selection -->
                     <div>
                         <label class="block text-gray-700 dark:text-gray-300 mb-2 font-medium">
                             <i class="fas fa-tag mr-2"></i>Element Type
                         </label>
-                        
+
                         <div class="grid grid-cols-2 lg:grid-cols-3 gap-2 mb-3">
-                            <button type="button" onclick="selectElement('h1')" class="element-btn p-3 rounded-lg bg-blue-100 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-800 text-gray-800 dark:text-white text-center hover:bg-blue-200 dark:hover:bg-blue-800 transition">
+                            <button type="button" onclick="selectElement('h1')"
+                                class="element-btn p-3 rounded-lg bg-blue-100 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-800 text-gray-800 dark:text-white text-center hover:bg-blue-200 dark:hover:bg-blue-800 transition">
                                 <i class="fas fa-heading mb-1 block text-lg"></i> H1
                             </button>
-                            <button type="button" onclick="selectElement('p')" class="element-btn p-3 rounded-lg bg-green-100 dark:bg-green-900/30 border border-green-200 dark:border-green-800 text-gray-800 dark:text-white text-center hover:bg-green-200 dark:hover:bg-green-800 transition">
+                            <button type="button" onclick="selectElement('p')"
+                                class="element-btn p-3 rounded-lg bg-green-100 dark:bg-green-900/30 border border-green-200 dark:border-green-800 text-gray-800 dark:text-white text-center hover:bg-green-200 dark:hover:bg-green-800 transition">
                                 <i class="fas fa-paragraph mb-1 block text-lg"></i> P
                             </button>
-                            <button type="button" onclick="selectElement('button')" class="element-btn p-3 rounded-lg bg-purple-100 dark:bg-purple-900/30 border border-purple-200 dark:border-purple-800 text-gray-800 dark:text-white text-center hover:bg-purple-200 dark:hover:bg-purple-800 transition">
+                            <button type="button" onclick="selectElement('button')"
+                                class="element-btn p-3 rounded-lg bg-purple-100 dark:bg-purple-900/30 border border-purple-200 dark:border-purple-800 text-gray-800 dark:text-white text-center hover:bg-purple-200 dark:hover:bg-purple-800 transition">
                                 <i class="fas fa-square mb-1 block text-lg"></i> Button
                             </button>
-                            <button type="button" onclick="selectElement('div')" class="element-btn p-3 rounded-lg bg-yellow-100 dark:bg-yellow-900/30 border border-yellow-200 dark:border-yellow-800 text-gray-800 dark:text-white text-center hover:bg-yellow-200 dark:hover:bg-yellow-800 transition">
+                            <button type="button" onclick="selectElement('div')"
+                                class="element-btn p-3 rounded-lg bg-yellow-100 dark:bg-yellow-900/30 border border-yellow-200 dark:border-yellow-800 text-gray-800 dark:text-white text-center hover:bg-yellow-200 dark:hover:bg-yellow-800 transition">
                                 <i class="fas fa-square-full mb-1 block text-lg"></i> Div
                             </button>
-                            <button type="button" onclick="selectElement('span')" class="element-btn p-3 rounded-lg bg-pink-100 dark:bg-pink-900/30 border border-pink-200 dark:border-pink-800 text-gray-800 dark:text-white text-center hover:bg-pink-200 dark:hover:bg-pink-800 transition">
+                            <button type="button" onclick="selectElement('span')"
+                                class="element-btn p-3 rounded-lg bg-pink-100 dark:bg-pink-900/30 border border-pink-200 dark:border-pink-800 text-gray-800 dark:text-white text-center hover:bg-pink-200 dark:hover:bg-pink-800 transition">
                                 <i class="fas fa-i-cursor mb-1 block text-lg"></i> Span
                             </button>
-                            <button type="button" onclick="selectElement('a')" class="element-btn p-3 rounded-lg bg-red-100 dark:bg-red-900/30 border border-red-200 dark:border-red-800 text-gray-800 dark:text-white text-center hover:bg-red-200 dark:hover:bg-red-800 transition">
+                            <button type="button" onclick="selectElement('a')"
+                                class="element-btn p-3 rounded-lg bg-red-100 dark:bg-red-900/30 border border-red-200 dark:border-red-800 text-gray-800 dark:text-white text-center hover:bg-red-200 dark:hover:bg-red-800 transition">
                                 <i class="fas fa-link mb-1 block text-lg"></i> Link
                             </button>
                         </div>
-                        
-                        <select id="elementSelect" required class="w-full p-3 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent theme-transition">
+
+                        <select id="elementSelect" required
+                            class="w-full p-3 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent theme-transition">
                             <option value="" disabled selected>Select element type</option>
                             <option value="h1">Heading 1 (h1)</option>
                             <option value="h2">Heading 2 (h2)</option>
@@ -357,8 +368,8 @@ input:checked + .theme-slider:before {
                         <label class="block text-gray-700 dark:text-gray-300 mb-2 font-medium">
                             <i class="fas fa-align-left mr-2"></i>Element Content
                         </label>
-                        <input type="text" id="contentInput" placeholder="Enter your content here..." 
-                               required class="w-full p-3 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent theme-transition">
+                        <input type="text" id="contentInput" placeholder="Enter your content here..." required
+                            class="w-full p-3 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent theme-transition">
                     </div>
 
                     <!-- Additional Options -->
@@ -366,18 +377,20 @@ input:checked + .theme-slider:before {
                         <h3 class="text-gray-700 dark:text-gray-300 mb-3 font-medium flex items-center">
                             <i class="fas fa-sliders-h mr-2"></i>Additional Options
                         </h3>
-                        
+
                         <div class="grid grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-gray-700 dark:text-gray-300 text-sm mb-1">Text Color</label>
-                                <input type="color" id="textColor" value="#1e293b" class="w-full h-10 rounded cursor-pointer dark:bg-gray-600">
+                                <input type="color" id="textColor" value="#1e293b"
+                                    class="w-full h-10 rounded cursor-pointer dark:bg-gray-600">
                             </div>
                             <div>
                                 <label class="block text-gray-700 dark:text-gray-300 text-sm mb-1">Background</label>
-                                <input type="color" id="bgColor" value="#4361ee" class="w-full h-10 rounded cursor-pointer dark:bg-gray-600">
+                                <input type="color" id="bgColor" value="#4361ee"
+                                    class="w-full h-10 rounded cursor-pointer dark:bg-gray-600">
                             </div>
                         </div>
-                        
+
                         <div class="mt-3">
                             <label class="inline-flex items-center text-gray-700 dark:text-gray-300">
                                 <input type="checkbox" id="addBorder" class="rounded text-blue-500 dark:text-blue-400">
@@ -388,10 +401,12 @@ input:checked + .theme-slider:before {
 
                     <!-- Action Buttons -->
                     <div class="flex space-x-3 pt-2 flex-wrap-mobile">
-                        <button type="submit" class="flex-1 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold py-3 px-4 lg:px-6 rounded-lg flex items-center justify-center hover:opacity-90 transition">
+                        <button type="submit"
+                            class="flex-1 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold py-3 px-4 lg:px-6 rounded-lg flex items-center justify-center hover:opacity-90 transition">
                             <i class="fas fa-plus mr-2"></i> Create Element
                         </button>
-                        <button type="button" onclick="clearAll()" class="px-4 lg:px-6 py-3 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 border border-red-200 dark:border-red-800 rounded-lg hover:bg-red-200 dark:hover:bg-red-800 transition">
+                        <button type="button" onclick="clearAll()"
+                            class="px-4 lg:px-6 py-3 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 border border-red-200 dark:border-red-800 rounded-lg hover:bg-red-200 dark:hover:bg-red-800 transition">
                             <i class="fas fa-trash"></i>
                         </button>
                     </div>
@@ -399,16 +414,19 @@ input:checked + .theme-slider:before {
             </div>
 
             <!-- Stats Card -->
-            <div class="bg-white dark:bg-gray-800 rounded-xl p-4 lg:p-5 shadow-lg border border-gray-200 dark:border-gray-700 theme-transition">
+            <div
+                class="bg-white dark:bg-gray-800 rounded-xl p-4 lg:p-5 shadow-lg border border-gray-200 dark:border-gray-700 theme-transition">
                 <h3 class="text-gray-700 dark:text-gray-300 mb-3 font-medium flex items-center">
                     <i class="fas fa-chart-bar mr-2"></i>Creation Stats
                 </h3>
                 <div class="grid grid-cols-2 gap-3 stats-grid">
-                    <div class="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3 text-center border border-blue-100 dark:border-blue-800">
+                    <div
+                        class="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3 text-center border border-blue-100 dark:border-blue-800">
                         <div class="text-blue-600 dark:text-blue-400 text-2xl font-bold" id="totalElements">0</div>
                         <div class="text-blue-500 dark:text-blue-300 text-xs">Total Elements</div>
                     </div>
-                    <div class="bg-green-50 dark:bg-green-900/20 rounded-lg p-3 text-center border border-green-100 dark:border-green-800">
+                    <div
+                        class="bg-green-50 dark:bg-green-900/20 rounded-lg p-3 text-center border border-green-100 dark:border-green-800">
                         <div class="text-green-600 dark:text-green-400 text-2xl font-bold" id="lastElement">None</div>
                         <div class="text-green-500 dark:text-green-300 text-xs">Last Created</div>
                     </div>
@@ -425,9 +443,10 @@ input:checked + .theme-slider:before {
                         <h1 class="text-2xl lg:text-3xl font-bold text-gray-800 dark:text-white mb-2 flex items-center">
                             <i class="fas fa-eye mr-3 text-blue-500 dark:text-blue-400"></i> Live Element Preview
                         </h1>
-                        <p class="text-gray-600 dark:text-gray-300">Watch your HTML elements come to life in real-time</p>
+                        <p class="text-gray-600 dark:text-gray-300">Watch your HTML elements come to life in real-time
+                        </p>
                     </div>
-                    
+
                     <div class="mt-4 lg:mt-0 flex items-center space-x-4">
                         <!-- Mobile Theme Toggle (only on mobile) -->
                         <div class="lg:hidden">
@@ -439,22 +458,24 @@ input:checked + .theme-slider:before {
                                 </span>
                             </label>
                         </div>
-                        
+
                         <div class="flex space-x-2 flex-wrap">
-                            <button onclick="exportHTML()" class="px-3 lg:px-4 py-2 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 border border-green-200 dark:border-green-800 rounded-lg hover:bg-green-200 dark:hover:bg-green-800 transition flex items-center">
+                            <button onclick="exportHTML()"
+                                class="px-3 lg:px-4 py-2 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 border border-green-200 dark:border-green-800 rounded-lg hover:bg-green-200 dark:hover:bg-green-800 transition flex items-center">
                                 <i class="fas fa-download mr-2"></i> <span class="hidden lg:inline">Export</span>
                             </button>
-                            <button onclick="toggleEditMode()" id="editModeBtn" class="px-3 lg:px-4 py-2 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 border border-purple-200 dark:border-purple-800 rounded-lg hover:bg-purple-200 dark:hover:bg-purple-800 transition flex items-center">
+                            <button onclick="toggleEditMode()" id="editModeBtn"
+                                class="px-3 lg:px-4 py-2 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 border border-purple-200 dark:border-purple-800 rounded-lg hover:bg-purple-200 dark:hover:bg-purple-800 transition flex items-center">
                                 <i class="fas fa-edit mr-2"></i> <span class="hidden lg:inline">Edit</span>
                             </button>
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="flex flex-col lg:flex-row lg:items-center space-y-2 lg:space-y-0 lg:space-x-4">
                     <div class="flex-1">
-                        <input type="text" id="searchElements" placeholder="Search elements..." 
-                               class="w-full p-3 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-800 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent theme-transition">
+                        <input type="text" id="searchElements" placeholder="Search elements..."
+                            class="w-full p-3 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-800 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent theme-transition">
                     </div>
                     <div class="text-gray-600 dark:text-gray-300 text-sm">
                         <span id="elementCount">0 elements</span>
@@ -463,22 +484,25 @@ input:checked + .theme-slider:before {
             </div>
 
             <!-- Preview Area -->
-            <div class="bg-white dark:bg-gray-800 rounded-xl p-4 lg:p-6 min-h-[400px] border-2 border-dashed border-blue-300 dark:border-blue-700 theme-transition">
+            <div
+                class="bg-white dark:bg-gray-800 rounded-xl p-4 lg:p-6 min-h-[400px] border-2 border-dashed border-blue-300 dark:border-blue-700 theme-transition">
                 <div class="flex flex-col lg:flex-row lg:items-center justify-between mb-6">
                     <h2 class="text-xl font-semibold text-gray-800 dark:text-white mb-2 lg:mb-0 flex items-center">
                         <i class="fas fa-code mr-2 text-yellow-500 dark:text-yellow-400"></i> Generated Elements
                     </h2>
                 </div>
-                
+
                 <!-- No Elements Message -->
                 <div id="emptyState" class="text-center py-8 lg:py-16">
-                    <div class="w-16 h-16 lg:w-24 lg:h-24 mx-auto mb-4 lg:mb-6 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
+                    <div
+                        class="w-16 h-16 lg:w-24 lg:h-24 mx-auto mb-4 lg:mb-6 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
                         <i class="fas fa-code text-white text-2xl lg:text-4xl"></i>
                     </div>
                     <h3 class="text-lg lg:text-xl text-gray-800 dark:text-white mb-2">No elements created yet</h3>
-                    <p class="text-gray-600 dark:text-gray-400 max-w-md mx-auto px-4">Start creating HTML elements using the form on the left. Your creations will appear here in real-time.</p>
+                    <p class="text-gray-600 dark:text-gray-400 max-w-md mx-auto px-4">Start creating HTML elements using
+                        the form on the left. Your creations will appear here in real-time.</p>
                 </div>
-                
+
                 <!-- Elements Container -->
                 <div id="result" class="space-y-3 lg:space-y-4">
                     <!-- Elements will be dynamically added here -->
@@ -491,24 +515,28 @@ input:checked + .theme-slider:before {
                     <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-2 lg:mb-0 flex items-center">
                         <i class="fas fa-file-code mr-2 text-green-500 dark:text-green-400"></i> Generated HTML Code
                     </h3>
-                    <button onclick="copyCode()" class="px-4 py-2 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 border border-blue-200 dark:border-blue-800 rounded-lg hover:bg-blue-200 dark:hover:bg-blue-800 transition flex items-center mt-2 lg:mt-0">
+                    <button onclick="copyCode()"
+                        class="px-4 py-2 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 border border-blue-200 dark:border-blue-800 rounded-lg hover:bg-blue-200 dark:hover:bg-blue-800 transition flex items-center mt-2 lg:mt-0">
                         <i class="fas fa-copy mr-2"></i> Copy Code
                     </button>
                 </div>
-                <pre id="codePreview" class="bg-gray-100 dark:bg-gray-900 p-4 rounded-lg text-gray-800 dark:text-gray-200 overflow-x-auto text-sm lg:text-base mt-4 theme-transition">
+                <pre id="codePreview"
+                    class="bg-gray-100 dark:bg-gray-900 p-4 rounded-lg text-gray-800 dark:text-gray-200 overflow-x-auto text-sm lg:text-base mt-4 theme-transition">
 &lt;!-- Generated HTML will appear here --&gt;</pre>
             </div>
         </div>
     </div>
 
     <!-- Toast Notification -->
-    <div id="toast" class="fixed bottom-4 right-4 bg-green-600 text-white p-4 rounded-lg shadow-lg hidden z-50 max-w-xs lg:max-w-sm theme-transition">
+    <div id="toast"
+        class="fixed bottom-4 right-4 bg-green-600 text-white p-4 rounded-lg shadow-lg hidden z-50 max-w-xs lg:max-w-sm theme-transition">
         <div class="flex items-center">
             <i class="fas fa-check-circle mr-2"></i>
             <span id="toastMessage">Element created successfully!</span>
         </div>
     </div>
 
-  <script src="js/index.js"></script>
+    <script src="js/index.js"></script>
 </body>
+
 </html>
