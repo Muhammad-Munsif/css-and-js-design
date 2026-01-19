@@ -1,4 +1,4 @@
-<script src="js/index.js">
+
         // Initialize on page load
         document.addEventListener("DOMContentLoaded", function () {
             // Initialize theme
@@ -523,5 +523,3 @@
                 toast.classList.add("hidden");
             }, 3000);
         }
-
-    </script>
