@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Element Creator | Playground</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+
+<body class="light-mode">
+    <!-- Mobile Menu Button -->
+    <div class="mobile-menu-btn lg:hidden fixed top-4 left-4 z-50">
+        <button id="mobileMenuBtn" class="bg-white dark:bg-gray-800 p-3 rounded-lg shadow-lg hover:scale-105 transition-transform">
+            <i class="fas fa-bars text-gray-800 dark:text-white text-lg"></i>
+        </button>
+    </div>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobileMenu" class="mobile-menu-overlay fixed inset-0 bg-black/50 z-40 lg:hidden" style="display: none;">
+        <div class="mobile-menu-content absolute left-0 top-0 h-full w-80 max-w-[90vw] bg-white dark:bg-gray-900 shadow-xl p-6 overflow-y-auto">
+            <div class="sticky top-0 bg-white dark:bg-gray-900 pb-4 z-10">
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center mr-3">
+                            <i class="fas fa-code text-white text-xl"></i>
+                        </div>
+                        <h2 class="text-xl font-bold text-gray-800 dark:text-white">HTML Creator</h2>
+                    </div>
+                    <button id="closeMobileMenu" class="close-menu-btn text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white p-2">
+                        <i class="fas fa-times text-2xl"></i>
+                    </button>
+                </div>
+                
+                <!-- Mobile Theme Toggle -->
+                <div class="flex items-center justify-between bg-gray-100 dark:bg-gray-800 p-4 rounded-lg mb-6">
+                    <span class="font-semibold text-gray-800 dark:text-white">Theme</span>
+                    <label class="theme-switch">
+                        <input type="checkbox" id="themeToggleMobile">
+                        <span class="theme-slider">
+                            <i class="fas fa-sun"></i>
+                            <i class="fas fa-moon"></i>
+                        </span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Mobile Form Container -->
+            <div id="mobileFormContainer" class="mobile-form-container"></div>
+        </div>
+    </div>
+
+    <div class="app-container min-h-screen flex flex-col lg:flex-row">
+        <!-- Sidebar for Desktop -->
+        <div id="desktopSidebar" class="desktop-sidebar hidden lg:flex lg:w-80 xl:w-96 p-4 lg:p-6 flex-col theme-transition">
+            <!-- Header -->
+            <div class="sidebar-header mb-8">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center">
+                        <div class="app-logo w-10 h-10 rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center mr-3">
+                            <i class="fas fa-code text-white text-xl"></i>
+                        </div>
+                        <h1 class="app-title text-xl lg:text-2xl font-bold text-gray-800 dark:text-white">HTML Creator</h1>
+                    </div>
+
+                    <!-- Theme Toggle for Desktop -->
+                    <label class="theme-switch">
+                        <input type="checkbox" id="themeToggle">
+                        <span class="theme-slider">
+                            <i class="fas fa-sun"></i>
+                            <i class="fas fa-moon"></i>
+                        </span>
+                    </label>
+                </div>
+
+                <p class="app-subtitle text-gray-600 dark:text-gray-300 text-sm">Create HTML elements dynamically with live preview</p>
+                <div class="flex items-center mt-3">
+                    <div class="status-indicator w-3 h-3 rounded-full bg-green-500 animate-pulse mr-2"></div>
+                    <span class="status-text text-green-600 dark:text-green-400 text-sm font-medium">Live Preview Active</span>
+                </div>
+            </div>
+
+            <!-- Form Card -->
+            <div class="form-card bg-white dark:bg-gray-800 rounded-xl p-4 lg:p-6 mb-6 shadow-lg border border-gray-200 dark:border-gray-700 theme-transition">
+                <h2 class="form-title text-lg lg:text-xl font-semibold text-gray-800 dark:text-white mb-4 flex items-center">
+                    <i class="fas fa-plus-circle mr-2 text-blue-500 dark:text-blue-400"></i> Create New Element
+                </h2>
+
+                <form id="elementForm" class="element-form space-y-4 lg:space-y-5">
+                    <!-- Element Type Selection -->
+                    <div class="element-type-section">
+                        <label class="section-label block text-gray-700 dark:text-gray-300 mb-2 font-medium">
+                            <i class="fas fa-tag mr-2"></i>Element Type
+                        </label>
+
+                        <div class="element-buttons grid grid-cols-2 lg:grid-cols-3 gap-2 mb-3">
+                            <button type="button" onclick="selectElement('h1')"
+                                class="element-btn h1-btn p-3 rounded-lg bg-blue-100 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-800 text-gray-800 dark:text-white text-center hover:bg-blue-200 dark:hover:bg-blue-800 transition">
+                                <i class="fas fa-heading mb-1 block text-lg"></i> H1
+                            </button>
+                            <button type="button" onclick="selectElement('p')"
+                                class="element-btn p-btn p-3 rounded-lg bg-green-100 dark:bg-green-900/30 border border-green-200 dark:border-green-800 text-gray-800 dark:text-white text-center hover:bg-green-200 dark:hover:bg-green-800 transition">
+                                <i class="fas fa-paragraph mb-1 block text-lg"></i> P
+                            </button>
+                            <button type="button" onclick="selectElement('button')"
+                                class="element-btn button-btn p-3 rounded-lg bg-purple-100 dark:bg-purple-900/30 border border-purple-200 dark:border-purple-800 text-gray-800 dark:text-white text-center hover:bg-purple-200 dark:hover:bg-purple-800 transition">
+                                <i class="fas fa-square mb-1 block text-lg"></i> Button
+                            </button>
+                            <button type="button" onclick="selectElement('div')"
+                                class="element-btn div-btn p-3 rounded-lg bg-yellow-100 dark:bg-yellow-900/30 border border-yellow-200 dark:border-yellow-800 text-gray-800 dark:text-white text-center hover:bg-yellow-200 dark:hover:bg-yellow-800 transition">
+                                <i class="fas fa-square-full mb-1 block text-lg"></i> Div
+                            </button>
+                            <button type="button" onclick="selectElement('span')"
+                                class="element-btn span-btn p-3 rounded-lg bg-pink-100 dark:bg-pink-900/30 border border-pink-200 dark:border-pink-800 text-gray-800 dark:text-white text-center hover:bg-pink-200 dark:hover:bg-pink-800 transition">
+                                <i class="fas fa-i-cursor mb-1 block text-lg"></i> Span
+                            </button>
+                            <button type="button" onclick="selectElement('a')"
+                                class="element-btn a-btn p-3 rounded-lg bg-red-100 dark:bg-red-900/30 border border-red-200 dark:border-red-800 text-gray-800 dark:text-white text-center hover:bg-red-200 dark:hover:bg-red-800 transition">
+                                <i class="fas fa-link mb-1 block text-lg"></i> Link
+                            </button>
+                        </div>
+
+                        <select id="elementSelect" required
+                            class="element-select w-full p-3 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent theme-transition">
+                            <option value="" disabled selected>Select element type</option>
+                            <option value="h1">Heading 1 (h1)</option>
+                            <option value="h2">Heading 2 (h2)</option>
+                            <option value="h3">Heading 3 (h3)</option>
+                            <option value="h4">Heading 4 (h4)</option>
+                            <option value="h5">Heading 5 (h5)</option>
+                            <option value="h6">Heading 6 (h6)</option>
+                            <option value="p">Paragraph (p)</option>
+                            <option value="div">Division (div)</option>
+                            <option value="span">Span (span)</option>
+                            <option value="button">Button (button)</option>
+                            <option value="a">Anchor/Link (a)</option>
+                        </select>
+                    </div>
+
+                    <!-- Content Input -->
+                    <div class="content-section">
+                        <label class="section-label block text-gray-700 dark:text-gray-300 mb-2 font-medium">
+                            <i class="fas fa-align-left mr-2"></i>Element Content
+                        </label>
+                        <input type="text" id="contentInput" placeholder="Enter your content here..." required
+                            class="content-input w-full p-3 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent theme-transition">
+                    </div>
+
+                    <!-- Additional Options -->
+                    <div class="options-section bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4">
+                        <h3 class="options-title text-gray-700 dark:text-gray-300 mb-3 font-medium flex items-center">
+                            <i class="fas fa-sliders-h mr-2"></i>Additional Options
+                        </h3>
+
+                        <div class="options-grid grid grid-cols-2 gap-4">
+                            <div class="color-picker">
+                                <label class="color-label block text-gray-700 dark:text-gray-300 text-sm mb-1">Text Color</label>
+                                <input type="color" id="textColor" value="#1e293b"
+                                    class="color-input w-full h-10 rounded cursor-pointer dark:bg-gray-600">
+                            </div>
+                            <div class="color-picker">
+                                <label class="color-label block text-gray-700 dark:text-gray-300 text-sm mb-1">Background</label>
+                                <input type="color" id="bgColor" value="#4361ee"
+                                    class="color-input w-full h-10 rounded cursor-pointer dark:bg-gray-600">
+                            </div>
+                        </div>
+
+                        <div class="checkbox-option mt-3">
+                            <label class="inline-flex items-center text-gray-700 dark:text-gray-300">
+                                <input type="checkbox" id="addBorder" class="border-checkbox rounded text-blue-500 dark:text-blue-400">
+                                <span class="ml-2 text-sm">Add Border</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="action-buttons flex space-x-3 pt-2 flex-wrap-mobile">
+                        <button type="submit"
+                            class="submit-btn flex-1 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold py-3 px-4 lg:px-6 rounded-lg flex items-center justify-center hover:opacity-90 transition">
+                            <i class="fas fa-plus mr-2"></i> Create Element
+                        </button>
+                        <button type="button" onclick="clearAll()"
+                            class="clear-btn px-4 lg:px-6 py-3 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 border border-red-200 dark:border-red-800 rounded-lg hover:bg-red-200 dark:hover:bg-red-800 transition">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Stats Card -->
+            <div class="stats-card bg-white dark:bg-gray-800 rounded-xl p-4 lg:p-5 shadow-lg border border-gray-200 dark:border-gray-700 theme-transition">
+                <h3 class="stats-title text-gray-700 dark:text-gray-300 mb-3 font-medium flex items-center">
+                    <i class="fas fa-chart-bar mr-2"></i>Creation Stats
+                </h3>
+                <div class="stats-grid grid grid-cols-2 gap-3">
+                    <div class="stat-item bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3 text-center border border-blue-100 dark:border-blue-800">
+                        <div class="stat-value text-blue-600 dark:text-blue-400 text-2xl font-bold" id="totalElements">0</div>
+                        <div class="stat-label text-blue-500 dark:text-blue-300 text-xs">Total Elements</div>
+                    </div>
+                    <div class="stat-item bg-green-50 dark:bg-green-900/20 rounded-lg p-3 text-center border border-green-100 dark:border-green-800">
+                        <div class="stat-value text-green-600 dark:text-green-400 text-2xl font-bold" id="lastElement">None</div>
+                        <div class="stat-label text-green-500 dark:text-green-300 text-xs">Last Created</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content flex-1 p-4 lg:p-8 overflow-auto theme-transition">
+            <!-- Header -->
+            <div class="main-header mb-6 lg:mb-8">
+                <div class="header-top flex flex-col lg:flex-row lg:items-center justify-between mb-4">
+                    <div class="header-left">
+                        <h1 class="main-title text-2xl lg:text-3xl font-bold text-gray-800 dark:text-white mb-2 flex items-center">
+                            <i class="fas fa-eye mr-3 text-blue-500 dark:text-blue-400"></i> Live Element Preview
+                        </h1>
+                        <p class="main-subtitle text-gray-600 dark:text-gray-300">Watch your HTML elements come to life in real-time</p>
+                    </div>
+
+                    <div class="header-right mt-4 lg:mt-0 flex items-center space-x-4">
+                        <!-- Mobile Theme Toggle -->
+                        <div class="mobile-theme-toggle lg:hidden">
+                            <label class="theme-switch">
+                                <input type="checkbox" id="themeToggleMobile2">
+                                <span class="theme-slider">
+                                    <i class="fas fa-sun"></i>
+                                    <i class="fas fa-moon"></i>
+                                </span>
+                            </label>
+                        </div>
+
+                        <div class="header-buttons flex space-x-2 flex-wrap">
+                            <button onclick="exportHTML()"
+                                class="export-btn px-3 lg:px-4 py-2 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 border border-green-200 dark:border-green-800 rounded-lg hover:bg-green-200 dark:hover:bg-green-800 transition flex items-center">
+                                <i class="fas fa-download mr-2"></i> <span class="hidden lg:inline">Export</span>
+                            </button>
+                            <button onclick="toggleEditMode()" id="editModeBtn"
+                                class="edit-btn px-3 lg:px-4 py-2 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 border border-purple-200 dark:border-purple-800 rounded-lg hover:bg-purple-200 dark:hover:bg-purple-800 transition flex items-center">
+                                <i class="fas fa-edit mr-2"></i> <span class="hidden lg:inline">Edit</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="search-section flex flex-col lg:flex-row lg:items-center space-y-2 lg:space-y-0 lg:space-x-4">
+                    <div class="search-container flex-1">
+                        <input type="text" id="searchElements" placeholder="Search elements..."
+                            class="search-input w-full p-3 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-800 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent theme-transition">
+                    </div>
+                    <div class="element-counter text-gray-600 dark:text-gray-300 text-sm">
+                        <span id="elementCount">0 elements</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Preview Area -->
+            <div class="preview-area bg-white dark:bg-gray-800 rounded-xl p-4 lg:p-6 min-h-[400px] border-2 border-dashed border-blue-300 dark:border-blue-700 theme-transition">
+                <div class="preview-header flex flex-col lg:flex-row lg:items-center justify-between mb-6">
+                    <h2 class="preview-title text-xl font-semibold text-gray-800 dark:text-white mb-2 lg:mb-0 flex items-center">
+                        <i class="fas fa-code mr-2 text-yellow-500 dark:text-yellow-400"></i> Generated Elements
+                    </h2>
+                </div>
+
+                <!-- No Elements Message -->
+                <div id="emptyState" class="empty-state text-center py-8 lg:py-16">
+                    <div class="empty-icon w-16 h-16 lg:w-24 lg:h-24 mx-auto mb-4 lg:mb-6 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
+                        <i class="fas fa-code text-white text-2xl lg:text-4xl"></i>
+                    </div>
+                    <h3 class="empty-title text-lg lg:text-xl text-gray-800 dark:text-white mb-2">No elements created yet</h3>
+                    <p class="empty-message text-gray-600 dark:text-gray-400 max-w-md mx-auto px-4">Start creating HTML elements using the form on the left. Your creations will appear here in real-time.</p>
+                </div>
+
+                <!-- Elements Container -->
+                <div id="result" class="elements-container space-y-3 lg:space-y-4">
+                    <!-- Elements will be dynamically added here -->
+                </div>
+            </div>
+
+            <!-- Code Preview -->
+            <div class="code-preview mt-6 lg:mt-8 bg-gray-50 dark:bg-gray-800 rounded-xl p-4 lg:p-6 theme-transition">
+                <div class="code-header flex flex-col lg:flex-row lg:items-center justify-between mb-4">
+                    <h3 class="code-title text-xl font-semibold text-gray-800 dark:text-white mb-2 lg:mb-0 flex items-center">
+                        <i class="fas fa-file-code mr-2 text-green-500 dark:text-green-400"></i> Generated HTML Code
+                    </h3>
+                    <button onclick="copyCode()"
+                        class="copy-btn px-4 py-2 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 border border-blue-200 dark:border-blue-800 rounded-lg hover:bg-blue-200 dark:hover:bg-blue-800 transition flex items-center mt-2 lg:mt-0">
+                        <i class="fas fa-copy mr-2"></i> Copy Code
+                    </button>
+                </div>
+                <pre id="codePreview"
+                    class="code-content bg-gray-100 dark:bg-gray-900 p-4 rounded-lg text-gray-800 dark:text-gray-200 overflow-x-auto text-sm lg:text-base mt-4 theme-transition">
+&lt;!-- Generated HTML will appear here --&gt;</pre>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast-notification fixed bottom-4 right-4 bg-green-600 text-white p-4 rounded-lg shadow-lg hidden z-50 max-w-xs lg:max-w-sm theme-transition">
+        <div class="toast-content flex items-center">
+            <i class="fas fa-check-circle mr-2"></i>
+            <span id="toastMessage">Element created successfully!</span>
+        </div>
+    </div>
+
+    <!-- JavaScript Files -->
+    <script src="js/theme.js"></script>
+    <script src="js/mobile.js"></script>
+    <script src="js/index.js"></script>
+</body>
+
+</html>
